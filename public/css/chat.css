@@ -1,0 +1,541 @@
+* {
+  box-sizing: border-box;
+}
+
+/* ── Botón flotante ── */
+.cadso-chat-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #e8762a;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(232, 118, 42, 0.4);
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s;
+}
+
+.cadso-chat-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 28px rgba(232, 118, 42, 0.5);
+}
+
+.cadso-chat-btn.active {
+  transform: scale(0) rotate(90deg);
+  pointer-events: none;
+  opacity: 0;
+}
+
+.cadso-chat-btn svg {
+  width: 28px;
+  height: 28px;
+  fill: white;
+}
+
+/* ── Ventana del chat ── */
+.cadso-chat-window {
+  position: fixed;
+  bottom: 96px;
+  right: 24px;
+  width: 380px;
+  height: 520px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.15);
+  z-index: 99999;
+  flex-direction: column;
+  overflow: hidden;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  opacity: 0;
+  transform: translateY(20px) scale(0.95);
+  pointer-events: none;
+  display: flex;
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              width 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              height 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              bottom 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              right 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-radius 0.35s;
+}
+
+.cadso-chat-window.open {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+/* ── Modo expandido ── */
+.cadso-chat-window.expanded {
+  width: 700px;
+  height: 80vh;
+  bottom: 24px;
+  right: 24px;
+  border-radius: 12px;
+}
+
+/* ── Header ── */
+.cadso-chat-header {
+  background: #2d3a50;
+  color: white;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.cadso-chat-header-avatar {
+  width: 38px;
+  height: 38px;
+  background: #e8762a;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.cadso-chat-header-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.cadso-chat-header-info h3 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.cadso-chat-header-info p {
+  margin: 2px 0 0;
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.cadso-chat-header-actions {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.cadso-expand-btn,
+.cadso-close-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.cadso-expand-btn:hover,
+.cadso-close-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.cadso-expand-btn svg,
+.cadso-close-btn svg {
+  width: 18px;
+  height: 18px;
+  fill: white;
+}
+
+/* ── Mensajes ── */
+.cadso-chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: #f5f5f5;
+}
+
+.cadso-chat-messages::-webkit-scrollbar {
+  width: 6px;
+}
+
+.cadso-chat-messages::-webkit-scrollbar-track {
+  background: #e8e8e8;
+  border-radius: 10px;
+}
+
+.cadso-chat-messages::-webkit-scrollbar-thumb {
+  background: #aaa;
+  border-radius: 10px;
+}
+
+.cadso-chat-messages::-webkit-scrollbar-thumb:hover {
+  background: #888;
+}
+
+.cadso-msg {
+  max-width: 85%;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 14px;
+  line-height: 1.55;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.cadso-msg.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.cadso-msg.bot {
+  background: white;
+  color: #333;
+  align-self: flex-start;
+  border-bottom-left-radius: 4px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+.cadso-msg.user {
+  background: #2d3a50;
+  color: white;
+  align-self: flex-end;
+  border-bottom-right-radius: 4px;
+}
+
+.cadso-msg.bot strong {
+  color: #e8762a;
+}
+
+/* ── Opciones ── */
+.cadso-msg-opciones {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.cadso-msg-opciones button {
+  background: #fef4ec;
+  border: 1px solid #e8762a;
+  color: #e8762a;
+  padding: 9px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  text-align: left;
+  transition: background 0.25s, color 0.25s, transform 0.15s;
+}
+
+.cadso-msg-opciones button:hover {
+  background: #e8762a;
+  color: white;
+  transform: translateX(4px);
+}
+
+/* ── Video embebido ── */
+.cadso-video {
+  margin: 8px 0;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  width: 100%;
+}
+
+.cadso-video iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 8px;
+}
+
+/* ── WhatsApp ── */
+.cadso-whatsapp-btn {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 16px;
+  background: #25d366;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.cadso-whatsapp-btn:hover {
+  background: #1da851;
+  transform: translateY(-1px);
+}
+
+/* ── Typing ── */
+.cadso-chat-typing {
+  display: none;
+  align-self: flex-start;
+  padding: 12px 16px;
+  background: white;
+  border-radius: 12px;
+  border-bottom-left-radius: 4px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+.cadso-chat-typing.show {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  animation: cadso-fadeIn 0.3s ease;
+}
+
+.cadso-chat-typing span {
+  width: 8px;
+  height: 8px;
+  background: #b0b0b0;
+  border-radius: 50%;
+  animation: cadso-typing 1.4s infinite;
+}
+
+.cadso-chat-typing span:nth-child(2) { animation-delay: 0.2s; }
+.cadso-chat-typing span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes cadso-typing {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30% { transform: translateY(-8px); opacity: 1; }
+}
+
+@keyframes cadso-fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Formulario de soporte ── */
+.cadso-support-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.cadso-support-form input,
+.cadso-support-form textarea {
+  border: 1.5px solid #ddd;
+  border-radius: 8px;
+  padding: 9px 12px;
+  font-size: 13px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s;
+  background: #fafafa;
+  color: #333;
+  width: 100%;
+}
+
+.cadso-support-form input:focus,
+.cadso-support-form textarea:focus {
+  border-color: #e8762a;
+  background: white;
+}
+
+.cadso-support-form textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+.cadso-support-form button {
+  background: #e8762a;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  font-family: inherit;
+}
+
+.cadso-support-form button:hover {
+  background: #d06820;
+  transform: translateY(-1px);
+}
+
+.cadso-support-form button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.cadso-form-success {
+  padding: 12px;
+  background: #f0faf0;
+  border: 1px solid #4caf50;
+  border-radius: 8px;
+  color: #2e7d32;
+  font-size: 13px;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* ── Imagen en mensaje ── */
+.cadso-msg-img {
+  max-width: 100%;
+  max-height: 160px;
+  border-radius: 8px;
+  display: block;
+  object-fit: cover;
+}
+
+/* ── Input ── */
+.cadso-chat-input {
+  display: flex;
+  padding: 12px;
+  border-top: 1px solid #eee;
+  background: white;
+  gap: 8px;
+  flex-shrink: 0;
+  align-items: center;
+}
+
+.cadso-attach-btn {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background 0.2s;
+  flex-shrink: 0;
+}
+
+.cadso-attach-btn:hover {
+  background: #f0f0f0;
+}
+
+.cadso-attach-btn svg {
+  width: 20px;
+  height: 20px;
+  fill: #888;
+  transition: fill 0.2s;
+}
+
+.cadso-attach-btn:hover svg {
+  fill: #e8762a;
+}
+
+.cadso-chat-input input[type="text"] {
+  flex: 1;
+  border: 1.5px solid #ddd;
+  border-radius: 24px;
+  padding: 10px 16px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+
+.cadso-chat-input input:focus {
+  border-color: #e8762a;
+  box-shadow: 0 0 0 3px rgba(232, 118, 42, 0.12);
+}
+
+.cadso-chat-input button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #e8762a;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, transform 0.15s;
+  flex-shrink: 0;
+}
+
+.cadso-chat-input button:hover {
+  background: #d06820;
+  transform: scale(1.05);
+}
+
+.cadso-chat-input button:active {
+  transform: scale(0.95);
+}
+
+.cadso-chat-input button svg {
+  width: 18px;
+  height: 18px;
+  fill: white;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .cadso-chat-window.open {
+    width: calc(100vw - 16px);
+    height: calc(100vh - 90px);
+    bottom: 8px;
+    right: 8px;
+    border-radius: 12px;
+  }
+
+  .cadso-chat-window.expanded {
+    width: 100vw;
+    height: 100vh;
+    bottom: 0;
+    right: 0;
+    border-radius: 0;
+  }
+
+  .cadso-expand-btn {
+    display: none;
+  }
+
+  .cadso-msg {
+    max-width: 90%;
+  }
+}
+
+@media (max-width: 430px) {
+  .cadso-chat-btn {
+    bottom: 16px;
+    right: 16px;
+    width: 54px;
+    height: 54px;
+  }
+
+  .cadso-chat-btn svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .cadso-chat-window.open {
+    width: 100vw;
+    height: calc(100vh - 60px);
+    bottom: 0;
+    right: 0;
+    border-radius: 16px 16px 0 0;
+  }
+}
+
+@media (min-width: 1200px) {
+  .cadso-chat-window.expanded {
+    width: 800px;
+    height: 85vh;
+  }
+}

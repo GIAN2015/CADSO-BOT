@@ -1,0 +1,374 @@
+{
+  "bienvenida": {
+    "mensaje": "¡Hola! 👋 Soy el asistente de instalación de SolidWorks de CADSO. Te voy a guiar paso a paso para instalar SolidWorks correctamente.\n\n¿Qué necesitas?",
+    "opciones": [
+      "📦 Instalar SolidWorks desde cero",
+      "🔄 Actualizar mi versión de SolidWorks",
+      "❌ Tengo un error de instalación",
+      "💻 Ver requisitos del sistema"
+    ]
+  },
+  "requisitos": {
+    "solidworks_2025": {
+      "so": ["Windows 11 (64 bits)", "Windows 10 versión 21H2 o posterior (64 bits)"],
+      "so_no_soportado": ["Windows 8.1", "Windows 7", "macOS", "Linux", "Windows en ARM"],
+      "ram": "16 GB mínimo, 32 GB recomendado, 64 GB para ensamblajes grandes o simulación",
+      "procesador": "Intel Core i7 o i9 / AMD Ryzen 7 o 9, 3.0 GHz o superior, 64 bits. Procesadores Xeon recomendados para estaciones de trabajo profesionales.",
+      "nucleos": "4 núcleos mínimo, 8+ recomendado para simulación y renderizado",
+      "disco": "20 GB libres para instalación base, 30-50 GB recomendado con todos los productos. SSD NVMe fuertemente recomendado.",
+      "grafica": {
+        "certificadas": ["NVIDIA Quadro / RTX (serie A, T, RTX A)", "AMD Radeon Pro (serie W)", "NVIDIA GeForce RTX (funcional pero no certificada oficialmente)"],
+        "vram": "4 GB mínimo, 8 GB recomendado",
+        "api": "OpenGL 4.5 obligatorio",
+        "notas": [
+          "Las tarjetas integradas Intel UHD/Iris NO están certificadas y causan errores gráficos frecuentes",
+          "Usar drivers profesionales/certificados, no los drivers gaming genéricos",
+          "Lista oficial de GPUs certificadas: solidworks.com/sw/support/videocardtesting.html",
+          "NVIDIA Studio Drivers funcionan bien como alternativa a los Quadro drivers"
+        ]
+      },
+      "resolucion": "1920x1080 mínimo, escalado DPI al 100% o 125% recomendado",
+      "net_framework": ".NET Framework 4.8 o superior (se instala automáticamente si falta)",
+      "net_desktop_runtime": ".NET Desktop Runtime 6.0 requerido para SolidWorks 2025",
+      "visual_cpp": "Visual C++ 2015-2022 Redistributable (se instala automáticamente)",
+      "navegador": "Microsoft Edge, Google Chrome o Firefox actualizado para eDrawings y portal",
+      "internet": "Necesaria para descarga, activación de licencia y actualizaciones",
+      "excel": "Microsoft Excel 2016 o posterior para tablas de diseño y BOM (opcional pero recomendado)",
+      "pdf": "Adobe Acrobat Reader para exportar/importar PDF 3D"
+    },
+    "solidworks_2024": {
+      "so": ["Windows 11 (64 bits)", "Windows 10 versión 21H2 o posterior (64 bits)"],
+      "ram": "16 GB mínimo, 32 GB recomendado",
+      "procesador": "Intel o AMD de 64 bits, 3.0 GHz o superior",
+      "disco": "20 GB libres para instalación base, SSD recomendado",
+      "grafica": "GPU certificada con OpenGL 4.5, 4 GB VRAM mínimo",
+      "net_framework": ".NET Framework 4.8"
+    },
+    "notas_generales": [
+      "SolidWorks NO funciona en macOS ni Linux de forma nativa. Se puede usar con máquina virtual (VMware/Parallels) pero NO es soportado oficialmente y puede tener problemas de rendimiento gráfico.",
+      "Las tarjetas gráficas integradas (Intel UHD/Iris) pueden causar crashes, artefactos visuales y rendimiento pobre.",
+      "Se recomienda desactivar el antivirus (Windows Defender, Avast, Norton, Kaspersky, etc.) durante la instalación.",
+      "Windows debe estar completamente actualizado antes de instalar SolidWorks.",
+      "Si usas Windows 11, asegúrate de tener la versión 22H2 o posterior para mejor compatibilidad.",
+      "No se recomienda instalar SolidWorks en unidades de red, solo en discos locales.",
+      "Para entornos empresariales con más de 5 equipos, considerar instalación administrativa con imagen."
+    ]
+  },
+  "versiones": {
+    "disponibles": ["SolidWorks 2025 SP3", "SolidWorks 2025 SP2", "SolidWorks 2025 SP1", "SolidWorks 2025 SP0", "SolidWorks 2024 SP5"],
+    "recomendada": "SolidWorks 2025 SP3",
+    "nota": "Siempre instala la versión más reciente con el Service Pack más actual, a menos que tu empresa o universidad requiera una versión específica. Los Service Packs corrigen errores y mejoran estabilidad.",
+    "service_packs": {
+      "que_es": "Los Service Packs (SP) son actualizaciones acumulativas que corrigen errores, mejoran rendimiento y agregan mejoras menores. Se recomienda siempre estar en el SP más reciente.",
+      "como_actualizar": "Abre SolidWorks > menú Ayuda > Buscar actualizaciones. También puedes descargar el SP desde el portal de clientes."
+    },
+    "compatibilidad": {
+      "nota": "Los archivos creados en versiones nuevas NO se pueden abrir en versiones anteriores. Ejemplo: un archivo de SW 2025 no abre en SW 2024. Sí se pueden abrir archivos antiguos en versiones nuevas.",
+      "pack_and_go": "Para compartir archivos entre versiones, usa Pack and Go (Archivo > Pack and Go) y guarda como versión anterior si es necesario."
+    }
+  },
+  "instalacion": {
+    "pre_requisitos": [
+      "Tener una conexión a internet estable",
+      "Tener tu número de serie a la mano (formato: XXXX-XXXX-XXXX-XXXX-XXXX-XXXX)",
+      "Tener cuenta en el portal de clientes de SolidWorks (customerportal.solidworks.com)",
+      "Cerrar todas las aplicaciones antes de instalar",
+      "Desactivar temporalmente el antivirus",
+      "Verificar que tu equipo cumple los requisitos mínimos",
+      "Tener al menos 50 GB de espacio libre en disco (para descarga + instalación)",
+      "Iniciar sesión como administrador de Windows",
+      "Desinstalar versiones beta o de evaluación previas si las hay"
+    ],
+    "pasos": [
+      {
+        "numero": 1,
+        "titulo": "Descargar el Installation Manager",
+        "descripcion": "Inicia sesión en el portal de clientes de SolidWorks (customerportal.solidworks.com). Ve a 'Descargas e instalaciones' > 'Descargar software' y selecciona tu versión. Descarga el archivo SolidWorksSetup.exe (es un archivo pequeño, el Installation Manager descargará el resto durante la instalación).",
+        "video": "https://www.youtube.com/watch?v=9nZmy-W3cgE",
+        "tip": "Si no tienes cuenta en el portal, puedes crearla con tu número de serie. Si compraste con CADSO, te enviamos los datos por correo."
+      },
+      {
+        "numero": 2,
+        "titulo": "Ejecutar como administrador",
+        "descripcion": "Haz clic derecho en el archivo SolidWorksSetup.exe descargado y selecciona 'Ejecutar como administrador'. Esto es OBLIGATORIO. Si no lo haces como administrador, la instalación puede fallar con error 1603 o permisos insuficientes.",
+        "video": null,
+        "tip": "Si el botón 'Ejecutar como administrador' no aparece, presiona Shift + clic derecho."
+      },
+      {
+        "numero": 3,
+        "titulo": "Seleccionar tipo de instalación",
+        "descripcion": "El Installation Manager te muestra varias opciones:\n• 'Instalación individual (en este equipo)': para un solo equipo con licencia standalone.\n• 'Instalar en una computadora conectada a un Servidor de licencias SolidNetWork': para licencias de red/flotantes.\n• 'Imagen administrativa': para crear una imagen de instalación que se despliega en múltiples equipos.\nPara la mayoría de usuarios, selecciona 'Instalación individual'.",
+        "video": "https://www.youtube.com/watch?v=9nZmy-W3cgE",
+        "tip": "Si no sabes qué tipo de licencia tienes, consulta con CADSO."
+      },
+      {
+        "numero": 4,
+        "titulo": "Ingresar número de serie",
+        "descripcion": "Introduce tu número de serie de SolidWorks (formato: XXXX-XXXX-XXXX-XXXX-XXXX-XXXX). Si tienes productos adicionales (Simulation, PDM, CAM, etc.), también ingresa sus números de serie en los campos correspondientes. El sistema validará los seriales en línea.",
+        "video": null,
+        "tip": "El número de serie lo puedes encontrar en: el correo de confirmación de tu compra, el portal de clientes, o contactando a CADSO."
+      },
+      {
+        "numero": 5,
+        "titulo": "Aceptar términos de licencia",
+        "descripcion": "Lee y acepta los términos del contrato de licencia de SolidWorks. Marca la casilla 'Acepto los términos del Contrato de licencia de SOLIDWORKS' y haz clic en Siguiente.",
+        "video": null,
+        "tip": null
+      },
+      {
+        "numero": 6,
+        "titulo": "Seleccionar productos a instalar",
+        "descripcion": "Marca los productos que deseas instalar. Los principales son:\n• SOLIDWORKS (obligatorio, es el programa base)\n• SOLIDWORKS Simulation (análisis de esfuerzos y movimiento)\n• SOLIDWORKS PDM (gestión de datos de producto)\n• SOLIDWORKS Electrical (diseño eléctrico)\n• SOLIDWORKS CAM (manufactura)\n• SOLIDWORKS Composer (documentación técnica)\n• eDrawings (visor gratuito)\n• SOLIDWORKS Flow Simulation (análisis de fluidos)\n• SOLIDWORKS Plastics (simulación de inyección)\nSi no estás seguro, deja la selección por defecto que incluye lo básico.",
+        "video": null,
+        "tip": "Solo puedes instalar los productos para los que tienes licencia. Los que no tengas se instalan en modo demo."
+      },
+      {
+        "numero": 7,
+        "titulo": "Configurar opciones de instalación",
+        "descripcion": "Configura las opciones avanzadas:\n• Carpeta de instalación: se recomienda dejar la predeterminada (C:\\Program Files\\SOLIDWORKS Corp).\n• Toolbox: selecciona 'Crear nueva' y elige la ubicación. Para equipos en red, apunta a una carpeta compartida.\n• Hole Wizard: se instala junto con Toolbox.\n• Idioma: selecciona Español (o el idioma que prefieras).\n• Unidades de descarga: puedes elegir descargar todo primero o instalar mientras descarga.",
+        "video": "https://www.youtube.com/watch?v=9nZmy-W3cgE",
+        "tip": "NO instales en una ruta con caracteres especiales (acentos, ñ, espacios múltiples). Usa la ruta predeterminada."
+      },
+      {
+        "numero": 8,
+        "titulo": "Instalar y esperar",
+        "descripcion": "Haz clic en 'Instalar ahora'. El proceso incluye descarga de archivos e instalación. Puede tardar entre 30 minutos y 3 horas dependiendo de:\n• Velocidad de internet (para descarga)\n• Velocidad del disco (SSD vs HDD)\n• Cantidad de productos seleccionados\n• Potencia del procesador\nNO cierres la ventana, NO reinicies el equipo y NO desconectes internet durante la instalación.",
+        "video": null,
+        "tip": "Si la instalación parece detenida en un porcentaje, espera al menos 15 minutos antes de asumir que se congeló."
+      },
+      {
+        "numero": 9,
+        "titulo": "Reiniciar el equipo",
+        "descripcion": "Una vez finalizada la instalación, el sistema te pedirá reiniciar. Haz clic en 'Reiniciar ahora'. Es IMPORTANTE reiniciar antes de abrir SolidWorks por primera vez para que los drivers y servicios se configuren correctamente.",
+        "video": null,
+        "tip": "Si no reinicias, puedes encontrar errores al abrir SolidWorks o al intentar activar."
+      },
+      {
+        "numero": 10,
+        "titulo": "Activar SolidWorks",
+        "descripcion": "Abre SolidWorks por primera vez. Te aparecerá el asistente de activación. Selecciona 'Activar ahora a través de Internet (recomendado)' y haz clic en Siguiente. Ingresa tu dirección de correo electrónico y la información solicitada. La activación se completa en segundos si tienes conexión a internet.",
+        "video": "https://www.youtube.com/watch?v=9nZmy-W3cgE",
+        "tip": "Si estás detrás de un firewall corporativo, puede que necesites activar por correo electrónico en vez de internet."
+      },
+      {
+        "numero": 11,
+        "titulo": "Verificar la instalación",
+        "descripcion": "Después de activar, crea una pieza nueva (Archivo > Nuevo > Pieza) para verificar que todo funciona correctamente. Dibuja un sketch simple y haz un extrude. Si funciona sin errores, la instalación fue exitosa.",
+        "video": null,
+        "tip": "Si experimentas problemas gráficos al rotar modelos, revisa los drivers de tu tarjeta gráfica."
+      }
+    ]
+  },
+  "errores_comunes": [
+    {
+      "codigo": "1603",
+      "titulo": "Error 1603 - Fallo fatal durante la instalación",
+      "causas": [
+        "Permisos de administrador insuficientes",
+        "Instalación previa de SolidWorks corrupta o incompleta",
+        "Antivirus bloqueando archivos DLL durante la instalación",
+        "Espacio insuficiente en disco",
+        "Archivos temporales de Windows corruptos",
+        "Carpeta TEMP sin permisos de escritura",
+        "Windows Installer dañado",
+        "Instalación previa de Visual C++ Redistributable corrupta"
+      ],
+      "solucion": "1. Desactiva completamente tu antivirus (no solo pausar, desactivar la protección en tiempo real).\n2. Ejecuta el Installation Manager como administrador (clic derecho > Ejecutar como administrador).\n3. Limpia archivos temporales: abre CMD como administrador y ejecuta 'del /q/f/s %TEMP%\\*'.\n4. Verifica espacio en disco: necesitas al menos 20 GB libres.\n5. Si tenías una versión anterior, desinstálala completamente usando la herramienta SolidWorks Clean Uninstall.\n6. Repara Windows Installer: abre CMD como administrador y ejecuta 'msiexec /unregister' seguido de 'msiexec /regserver'.\n7. Revisa el log de errores detallado en: C:\\Users\\TuUsuario\\AppData\\Local\\Temp\\SolidWorks Installation Logs\\\n8. Si nada funciona, crea un nuevo usuario administrador en Windows e intenta instalar desde ahí."
+    },
+    {
+      "codigo": "1606",
+      "titulo": "Error 1606 - No se puede tener acceso a la ubicación de red",
+      "causas": [
+        "Entradas de registro de Shell Folders corruptas",
+        "Carpetas de usuario redirigidas a una ubicación de red inaccesible",
+        "Permisos incorrectos en el registro de Windows"
+      ],
+      "solucion": "1. Abre el Editor de Registro (regedit) como administrador.\n2. Navega a HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Shell Folders.\n3. Verifica que todas las rutas apunten a carpetas existentes y accesibles.\n4. Repite para HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Shell Folders.\n5. Si encuentras rutas de red, cámbialas temporalmente a rutas locales (ej: C:\\Users\\TuUsuario\\Documents).\n6. Reinicia e intenta instalar nuevamente."
+    },
+    {
+      "codigo": "1642",
+      "titulo": "Error 1642 - No se pudo aplicar el parche de actualización",
+      "causas": [
+        "Instalación base de SolidWorks corrupta",
+        "Service Pack previo no se instaló correctamente",
+        "Archivos de instalación dañados en la descarga"
+      ],
+      "solucion": "1. Desinstala SolidWorks completamente desde Panel de Control.\n2. Usa la herramienta SolidWorks Clean Uninstall para limpiar restos.\n3. Descarga nuevamente el Installation Manager desde el portal.\n4. Realiza una instalación limpia con el Service Pack más reciente.\n5. NO intentes actualizar sobre una instalación corrupta."
+    },
+    {
+      "codigo": "0xc0000142",
+      "titulo": "Error 0xc0000142 - La aplicación no pudo inicializarse correctamente",
+      "causas": [
+        "Archivos del sistema de Windows corruptos",
+        "Conflicto con .NET Framework (versión incorrecta o corrupta)",
+        "Drivers de GPU desactualizados o corruptos",
+        "DLL del sistema faltantes o dañadas",
+        "Conflicto con otro software (antivirus, CAD competidores)"
+      ],
+      "solucion": "1. Actualiza los drivers de tu tarjeta gráfica desde el sitio oficial del fabricante (NVIDIA, AMD, Intel).\n2. Abre CMD como administrador y ejecuta 'sfc /scannow' para reparar archivos del sistema.\n3. Ejecuta 'DISM /Online /Cleanup-Image /RestoreHealth' para reparar la imagen de Windows.\n4. Repara .NET Framework: Panel de Control > Programas > Activar o desactivar características de Windows, desmarca .NET 3.5, aplica, reinicia, y vuelve a marcarlo.\n5. Instala/repara Visual C++ 2015-2022 Redistributable desde el sitio de Microsoft.\n6. Si nada funciona, intenta abrir SolidWorks en Modo Seguro: sldworks.exe /safemode."
+    },
+    {
+      "codigo": "0xc000007b",
+      "titulo": "Error 0xc000007b - La aplicación no se pudo iniciar correctamente",
+      "causas": [
+        "Mezcla de componentes de 32 y 64 bits",
+        "Visual C++ Redistributable corrupto o faltante",
+        "DirectX desactualizado",
+        "DLL del sistema dañadas"
+      ],
+      "solucion": "1. Descarga e instala Visual C++ Redistributable (ambas versiones x86 y x64) desde Microsoft.\n2. Actualiza DirectX desde el sitio de Microsoft.\n3. Ejecuta 'sfc /scannow' en CMD como administrador.\n4. Ejecuta 'DISM /Online /Cleanup-Image /RestoreHealth'.\n5. Reinstala SolidWorks si el problema persiste."
+    },
+    {
+      "codigo": "licencia",
+      "titulo": "Error de activación / licencia no válida",
+      "causas": [
+        "Número de serie incorrecto o con errores de tipeo",
+        "Licencia ya activada en el máximo de equipos permitidos",
+        "Sin conexión a internet durante la activación",
+        "Firewall bloqueando la comunicación con el servidor de licencias",
+        "Licencia expirada (suscripción vencida)",
+        "Reloj del sistema con fecha/hora incorrecta"
+      ],
+      "solucion": "1. Verifica que el número de serie esté escrito correctamente (sin espacios extra ni caracteres especiales).\n2. Comprueba en el portal de clientes que tu suscripción esté vigente.\n3. Si la licencia está activada en otro equipo, transfiere la licencia: en el equipo anterior ve a Inicio > SOLIDWORKS > Transferir licencia.\n4. Asegúrate de tener conexión a internet estable y que el firewall no bloquee los puertos 443 y 25.\n5. Verifica que la fecha y hora de tu equipo sean correctas.\n6. Si usas licencia de red (SolidNetWork License), verifica que el servidor de licencias esté activo y accesible.\n7. Intenta la activación por correo electrónico si la activación por internet falla.\n8. Contacta a CADSO si el problema persiste, ya que puede requerir un reset de activación en el servidor de Dassault."
+    },
+    {
+      "codigo": "snl",
+      "titulo": "Error de licencia SolidNetWork (SNL) - No se puede conectar al servidor",
+      "causas": [
+        "Servidor de licencias SolidNetWork no está corriendo",
+        "Puerto del servidor de licencias bloqueado (por defecto 25734 y 25735)",
+        "Firewall bloqueando comunicación entre cliente y servidor",
+        "Versión del License Manager incompatible",
+        "Todas las licencias flotantes están en uso"
+      ],
+      "solucion": "1. Verifica que el servicio SolidNetWork License Manager esté corriendo en el servidor (services.msc).\n2. Asegúrate que los puertos 25734 y 25735 estén abiertos en el firewall del servidor y del cliente.\n3. Desde el cliente, haz ping al servidor para verificar conectividad.\n4. Actualiza el SolidNetWork License Manager a la misma versión que el cliente.\n5. Revisa el log del servidor en: C:\\Program Files (x86)\\SolidWorks SolidNetWork License Manager\\lmgrd.log\n6. Si todas las licencias están en uso, pide a un colega que cierre SolidWorks para liberar una licencia."
+    },
+    {
+      "codigo": "opengl",
+      "titulo": "Problemas de rendimiento / errores gráficos / artefactos visuales",
+      "causas": [
+        "GPU no certificada para SolidWorks",
+        "Drivers genéricos de Windows instalados en vez de drivers del fabricante",
+        "OpenGL 4.5 no soportado por la GPU",
+        "Resolución de pantalla o escalado DPI incorrecto",
+        "GPU integrada usándose en vez de la GPU dedicada",
+        "Aceleración por hardware deshabilitada"
+      ],
+      "solucion": "1. Verifica si tu GPU está en la lista de compatibilidad: solidworks.com/sw/support/videocardtesting.html\n2. Descarga e instala los drivers certificados desde NVIDIA (nvidia.com/drivers) o AMD (amd.com/support) — NO uses los drivers que instala Windows Update.\n3. En SolidWorks: Herramientas > Opciones > Sistema > Rendimiento, verifica que 'Usar rendimiento de software OpenGL' esté DESACTIVADO (a menos que sea la única forma de evitar crashes).\n4. Si tienes GPU integrada + dedicada: Panel de control NVIDIA > Administrar configuración 3D > Configuración de programa > SLDWORKS.exe > selecciona 'Procesador NVIDIA de alto rendimiento'.\n5. Ajusta el escalado de pantalla al 100% o 125%: Configuración de Windows > Pantalla > Escala.\n6. Desactiva 'Antialiasing' en las opciones de SolidWorks si hay artefactos.\n7. Actualiza a la versión más reciente de SolidWorks (los SP suelen corregir bugs gráficos)."
+    },
+    {
+      "codigo": "net_framework",
+      "titulo": "Error de .NET Framework durante instalación",
+      "causas": [
+        ".NET Framework 4.8 no instalado o versión incorrecta",
+        "Versión corrupta de .NET en el sistema",
+        ".NET Desktop Runtime 6.0 faltante (requerido para SW 2025)",
+        "Windows Update bloqueado o desactualizado"
+      ],
+      "solucion": "1. Descarga .NET Framework 4.8 desde el sitio de Microsoft: go.microsoft.com/fwlink/?LinkId=2085155\n2. Para SolidWorks 2025, descarga también .NET Desktop Runtime 6.0 desde dotnet.microsoft.com/download/dotnet/6.0\n3. Instálalos manualmente ANTES de iniciar el Installation Manager de SolidWorks.\n4. Si falla, desinstala todas las versiones de .NET, reinicia, e instálalas de nuevo.\n5. Ejecuta Windows Update para asegurarte de tener los últimos parches.\n6. Usa la herramienta de reparación de .NET de Microsoft: aka.ms/dotnet-repair"
+    },
+    {
+      "codigo": "solidworks_rx",
+      "titulo": "SolidWorks Rx - Herramienta de diagnóstico",
+      "causas": [],
+      "solucion": "SolidWorks Rx es una herramienta de diagnóstico incluida con SolidWorks. Úsala para:\n1. Abrir desde: Inicio > SOLIDWORKS > SOLIDWORKS Rx\n2. Pestaña 'Diagnósticos del sistema': verifica hardware, drivers y software.\n3. Pestaña 'Modo seguro': abre SolidWorks con configuración predeterminada para aislar problemas.\n4. Pestaña 'Captura de problema': graba tu pantalla mientras reproduces el error para enviarlo a soporte.\n5. Pestaña 'Registros': accede a logs detallados para diagnóstico.\nSi reportas un problema a CADSO, incluye la captura de SolidWorks Rx."
+    },
+    {
+      "codigo": "lento",
+      "titulo": "SolidWorks se ejecuta muy lento",
+      "causas": [
+        "RAM insuficiente (menos de 16 GB)",
+        "Disco duro mecánico (HDD) en vez de SSD",
+        "Ensamblajes muy grandes sin usar configuraciones ligeras",
+        "Demasiados complementos (add-ins) cargados",
+        "GPU no adecuada o con drivers desactualizados",
+        "Archivos de SolidWorks en unidad de red en vez de local"
+      ],
+      "solucion": "1. Verifica el uso de RAM en el Administrador de tareas. Si está al 90%+ necesitas más RAM.\n2. Mueve SolidWorks y tus archivos a un SSD si están en HDD.\n3. Desactiva add-ins que no uses: Herramientas > Complementos, desmarca los que no necesites.\n4. Para ensamblajes grandes, usa el modo 'Ligero' o 'Grandes ensamblajes': Herramientas > Opciones > Ensamblajes.\n5. Activa 'Abrir componentes referidos como ligeros' en Opciones.\n6. Actualiza los drivers de GPU.\n7. En Herramientas > Opciones > Rendimiento: ajusta 'Nivel de detalle' y 'Calidad de imagen' a valores más bajos.\n8. Guarda archivos de trabajo localmente, no en unidades de red o en la nube (OneDrive, Dropbox)."
+    },
+    {
+      "codigo": "crash",
+      "titulo": "SolidWorks se cierra inesperadamente / crashea",
+      "causas": [
+        "Drivers de GPU incompatibles o desactualizados",
+        "Archivo de SolidWorks corrupto",
+        "Add-in de tercero causando conflicto",
+        "RAM insuficiente o defectuosa",
+        "Instalación de SolidWorks dañada"
+      ],
+      "solucion": "1. Actualiza los drivers de tu GPU a la versión más reciente del fabricante.\n2. Abre SolidWorks en Modo Seguro: sldworks.exe /safemode (desactiva todos los add-ins).\n3. Si funciona en modo seguro, el problema es un add-in. Reactívalos uno por uno para identificar cuál causa el crash.\n4. Prueba abrir otros archivos para determinar si es un archivo corrupto.\n5. Ejecuta SolidWorks Rx > Diagnósticos del sistema para verificar el hardware.\n6. Si el problema es con un archivo específico, intenta: Archivo > Abrir > selecciona el archivo > en 'Modo' elige 'Recuperar'.\n7. Repara la instalación: Panel de Control > Programas > SOLIDWORKS > Modificar > Reparar.\n8. Revisa el Visor de eventos de Windows (eventvwr) para errores de aplicación que indiquen la causa."
+    },
+    {
+      "codigo": "desinstalar",
+      "titulo": "Cómo desinstalar SolidWorks completamente",
+      "causas": [],
+      "solucion": "Para una desinstalación limpia:\n1. Cierra SolidWorks y todos los programas relacionados.\n2. Ve a Panel de Control > Programas y características.\n3. Selecciona 'SOLIDWORKS' y haz clic en 'Desinstalar/Cambiar'.\n4. Selecciona 'Desinstalar' y marca todos los productos.\n5. Marca 'Eliminar carpetas de instalación' si quieres limpieza total.\n6. Para limpieza profunda después de desinstalar:\n   a. Elimina la carpeta C:\\Program Files\\SOLIDWORKS Corp\n   b. Elimina C:\\ProgramData\\SolidWorks\n   c. Elimina la carpeta SolidWorks en C:\\Users\\TuUsuario\\AppData\\Roaming\n   d. En el Registro (regedit): elimina HKEY_CURRENT_USER\\Software\\SolidWorks\n7. Reinicia el equipo antes de reinstalar."
+    }
+  ],
+  "tipos_licencia": {
+    "standalone": {
+      "nombre": "Licencia Individual (Standalone)",
+      "descripcion": "Se activa en un solo equipo. Puedes transferirla a otro equipo desactivándola primero.",
+      "como_transferir": "En SolidWorks: Inicio > SOLIDWORKS > Transferir licencia. Esto desactiva la licencia en el equipo actual y te permite activarla en otro."
+    },
+    "network": {
+      "nombre": "Licencia de Red (SolidNetWork License - SNL)",
+      "descripcion": "Permite que múltiples usuarios compartan licencias flotantes. Requiere un servidor de licencias. Ejemplo: con 5 licencias SNL, 5 personas pueden usar SolidWorks simultáneamente de un pool de usuarios.",
+      "servidor": "Se instala con el SolidNetWork License Manager en un servidor Windows. Puertos requeridos: 25734 y 25735."
+    },
+    "online": {
+      "nombre": "Licencia en línea (Online Licensing)",
+      "descripcion": "Licencia vinculada a tu cuenta de SOLIDWORKS ID. Puedes usarla en cualquier equipo iniciando sesión. Requiere conexión a internet al menos cada 30 días.",
+      "como_activar": "En SolidWorks: Ayuda > Licencias > Activar/Desactivar > Inicio de sesión en SOLIDWORKS ID."
+    }
+  },
+  "productos": {
+    "solidworks_standard": {
+      "nombre": "SolidWorks Standard",
+      "incluye": ["Modelado 3D de piezas y ensamblajes", "Dibujos 2D", "Chapa metálica", "Piezas soldadas", "Moldes", "Enrutamiento básico", "Animación básica", "eDrawings", "DFMXpress", "SimulationXpress", "FloXpress"]
+    },
+    "solidworks_professional": {
+      "nombre": "SolidWorks Professional",
+      "incluye": ["Todo lo de Standard", "Toolbox", "SolidWorks Utilities", "FeatureWorks", "PhotoView 360 (renderizado)", "CircuitWorks", "ScanTo3D", "Biblioteca de contenido", "Tolerancias (TolAnalyst)", "eDrawings Professional"]
+    },
+    "solidworks_premium": {
+      "nombre": "SolidWorks Premium",
+      "incluye": ["Todo lo de Professional", "SolidWorks Simulation (FEA)", "SolidWorks Motion", "SolidWorks Routing (tuberías y cableado)", "Análisis de fatiga", "Análisis de frecuencia", "Análisis térmico"]
+    }
+  },
+  "actualizacion": {
+    "desde_version_anterior": {
+      "pasos": [
+        "Haz un respaldo de tus archivos y configuraciones antes de actualizar.",
+        "Abre el Installation Manager desde el menú Inicio o descárgalo del portal.",
+        "Selecciona 'Modificar la instalación individual (en este equipo)'.",
+        "Elige la nueva versión/Service Pack.",
+        "El Installation Manager detectará tu instalación actual y la actualizará.",
+        "Reinicia al terminar.",
+        "Verifica que tus archivos abran correctamente en la nueva versión."
+      ],
+      "advertencias": [
+        "Los archivos guardados en la nueva versión NO se pueden abrir en versiones anteriores.",
+        "Haz Pack and Go de archivos importantes antes de actualizar.",
+        "Los add-ins de terceros pueden no ser compatibles con la nueva versión.",
+        "Actualiza el servidor de licencias SNL ANTES de actualizar los clientes.",
+        "No desinstales la versión anterior primero — el Installation Manager se encarga."
+      ]
+    },
+    "service_pack": {
+      "pasos": [
+        "Abre SolidWorks > Ayuda > Buscar actualizaciones.",
+        "O descarga el SP desde el portal de clientes.",
+        "Cierra SolidWorks antes de instalar el SP.",
+        "Ejecuta el instalador como administrador.",
+        "Sigue el asistente y espera a que complete.",
+        "Reinicia el equipo."
+      ]
+    }
+  },
+  "documentacion_contexto": "SolidWorks es un software CAD 3D paramétrico desarrollado por Dassault Systèmes, utilizado globalmente para diseño mecánico, simulación FEA/CFD, PDM, manufactura (CAM), diseño eléctrico y documentación técnica. La instalación se realiza a través del SolidWorks Installation Manager (SLDIM), un asistente que gestiona la descarga, instalación y configuración de todos los productos del paquete SolidWorks.\n\nRequisitos clave: Windows 10/11 de 64 bits, mínimo 16 GB RAM (32 GB recomendado), GPU certificada con OpenGL 4.5, SSD recomendado, .NET Framework 4.8+, conexión a internet para activación. NO funciona en macOS/Linux nativamente.\n\nTipos de licencia: Standalone (un equipo), SolidNetWork/SNL (flotante en red, puertos 25734-25735), Online Licensing (vinculada a SOLIDWORKS ID).\n\nProblemas frecuentes: error 1603 (permisos/antivirus), 0xc0000142 (DLLs/.NET), problemas gráficos (GPU/drivers), errores de licencia (serial/activación/SNL), rendimiento lento (RAM/HDD/add-ins), crashes (drivers GPU/add-ins conflictivos).\n\nHerramientas de diagnóstico: SolidWorks Rx (incluida), modo seguro (sldworks.exe /safemode), logs en AppData\\Local\\Temp.\n\nCADSO es revendedor autorizado de SolidWorks en Perú y ofrece soporte técnico especializado, capacitación y licenciamiento.",
+  "whatsapp": {
+    "numero": "51967152992",
+    "mensaje_predeterminado": "Hola CADSO, necesito ayuda con la instalación de SolidWorks. "
+  }
+}
