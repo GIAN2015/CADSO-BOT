@@ -18,16 +18,16 @@
     const btn = document.createElement('button');
     btn.className = 'cadso-chat-btn';
     btn.setAttribute('aria-label', 'Abrir chat de soporte');
-    btn.innerHTML = `<svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.2L4 17.2V4h16v12z"/></svg>`;
+    btn.innerHTML = `<img src="${API_URL}/img/botcad-naranja.png" alt="BotCAD" />`;
     btn.onclick = toggleChat;
 
     const win = document.createElement('div');
     win.className = 'cadso-chat-window';
     win.innerHTML = `
       <div class="cadso-chat-header">
-        <div class="cadso-chat-header-avatar">🤖</div>
+        <div class="cadso-chat-header-avatar"><img src="${API_URL}/img/botcad-azul.png" alt="BotCAD" /></div>
         <div class="cadso-chat-header-info">
-          <h3>Soporte CADSO</h3>
+          <h3>BotCAD</h3>
           <p>Asistente de instalación SolidWorks</p>
         </div>
         <div class="cadso-chat-header-actions">
