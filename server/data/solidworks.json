@@ -303,6 +303,85 @@
       "titulo": "Cómo desinstalar SolidWorks completamente",
       "causas": [],
       "solucion": "Para una desinstalación limpia:\n1. Cierra SolidWorks y todos los programas relacionados.\n2. Ve a Panel de Control > Programas y características.\n3. Selecciona 'SOLIDWORKS' y haz clic en 'Desinstalar/Cambiar'.\n4. Selecciona 'Desinstalar' y marca todos los productos.\n5. Marca 'Eliminar carpetas de instalación' si quieres limpieza total.\n6. Para limpieza profunda después de desinstalar:\n   a. Elimina la carpeta C:\\Program Files\\SOLIDWORKS Corp\n   b. Elimina C:\\ProgramData\\SolidWorks\n   c. Elimina la carpeta SolidWorks en C:\\Users\\TuUsuario\\AppData\\Roaming\n   d. En el Registro (regedit): elimina HKEY_CURRENT_USER\\Software\\SolidWorks\n7. Reinicia el equipo antes de reinstalar."
+    },
+    {
+      "codigo": "reboot_pending",
+      "titulo": "Mensaje 'A Windows reboot is pending' al iniciar Installation Manager",
+      "causas": [
+        "Un programa o actualización intentó renombrar un archivo que está en uso",
+        "Windows Update pendiente de reinicio",
+        "Instalación previa que no completó el reinicio"
+      ],
+      "solucion": "1. Haz clic en OK para intentar continuar con la instalación.\n2. Si no funciona, reinicia el equipo completamente: Inicio > Encendido > Reiniciar (no apagar y encender).\n3. Después del reinicio, ejecuta el Installation Manager de nuevo.\n4. Si persiste, abre CMD como administrador y ejecuta: 'reg delete HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager /v PendingFileRenameOperations /f' y reinicia."
+    },
+    {
+      "codigo": "entitlement",
+      "titulo": "Error de verificación de licencia (Entitlement Check) en Installation Manager",
+      "causas": [
+        "Sin conexión a internet durante la instalación",
+        "Firewall bloqueando el Installation Manager",
+        "Opción 'Disable Internet Access' activada en el Installation Manager",
+        "Cuenta de Windows sin permisos de administrador"
+      ],
+      "solucion": "1. Verifica que 'Disable Internet Access' esté DESACTIVADO en la barra de título del Installation Manager.\n2. Usa una cuenta de Windows con permisos de administrador local completos.\n3. Permite conexiones TCP salientes en el puerto 80 en el Firewall de Windows para los archivos sldim.exe y sldimdownloader.exe.\n4. Si usas proxy corporativo, configúralo en el Installation Manager: Herramientas > Opciones > Proxy.\n5. Prueba desactivar temporalmente el firewall para confirmar si es la causa."
+    },
+    {
+      "codigo": "version_nueva",
+      "titulo": "Error 'A newer version of this application is already installed'",
+      "causas": [
+        "Conflicto con Visual Basic for Applications (VBA) 7.1 actualizado en SolidWorks 2021 SP2+",
+        "Intentar instalar una versión anterior de SolidWorks cuando ya hay una más reciente",
+        "Residuos de una instalación anterior no desinstalada completamente"
+      ],
+      "solucion": "1. Abre Panel de Control > Programas y características.\n2. Busca 'Microsoft Visual Basic for Applications 7.1' en la lista.\n3. Desinstálalo manualmente.\n4. Reinicia el equipo.\n5. Ejecuta el Installation Manager de nuevo.\n6. Si persiste, usa la herramienta Windows Installer CleanUp para eliminar los registros de VBA."
+    },
+    {
+      "codigo": "toolbox_upgrade",
+      "titulo": "Error 'Previous Toolbox detected' al actualizar SolidWorks",
+      "causas": [
+        "Toolbox de una versión anterior detectado durante la actualización",
+        "Opciones de Toolbox/Hole Wizard aparecen en gris",
+        "Instalación previa de Toolbox corrupta"
+      ],
+      "solucion": "1. Abre Panel de Control > Programas y características.\n2. Busca 'SOLIDWORKS' en la lista.\n3. Haz clic derecho > Cambiar.\n4. Selecciona 'Reparar la instalación'.\n5. Deja todos los componentes marcados y procede con la reparación.\n6. Una vez reparado, ejecuta la actualización de nuevo.\n7. Si persiste, desinstala SolidWorks completamente y haz una instalación limpia de la nueva versión."
+    },
+    {
+      "codigo": "gpu_config",
+      "titulo": "Configuración incorrecta de GPU / SolidWorks usa la tarjeta gráfica equivocada",
+      "causas": [
+        "Laptop con GPU integrada Intel + GPU dedicada NVIDIA/AMD",
+        "Windows asignó SolidWorks a la GPU integrada en vez de la dedicada",
+        "Driver genérico de Windows instalado en vez del driver certificado",
+        "Panel de control de NVIDIA/AMD no configurado para SolidWorks"
+      ],
+      "solucion": "1. Verifica qué GPU está usando SolidWorks: abre SolidWorks Rx > pestaña Diagnósticos.\n2. Si usa la GPU integrada Intel, cámbialo:\n   - **Windows 10/11:** Configuración > Sistema > Pantalla > Gráficos > Agregar SLDWORKS.exe > seleccionar 'Alto rendimiento'.\n   - **Panel NVIDIA:** Clic derecho en escritorio > Panel de control NVIDIA > Administrar configuración 3D > Configuración de programa > Seleccionar SLDWORKS.exe > 'Procesador NVIDIA de alto rendimiento'.\n3. Opción alternativa: desactivar la GPU integrada en el Administrador de dispositivos o en el BIOS (buscar 'Switchable Graphics').\n4. Instala el driver certificado desde la página de certificación de hardware de SolidWorks."
+    },
+    {
+      "codigo": "diagnostico_crash",
+      "titulo": "Cómo diagnosticar crashes de SolidWorks con SolidWorks Rx",
+      "causas": [],
+      "solucion": "Guía paso a paso para diagnosticar crashes:\n1. Identifica si el crash ocurre con todos los archivos o solo uno específico.\n2. Si es un solo archivo, intenta abrirlo con Archivo > Abrir > Modo 'Recuperar'.\n3. Abre SolidWorks Rx desde el menú Inicio (busca 'SolidWorks Rx').\n4. Pestaña 'Diagnósticos': verifica hardware, drivers y actualizaciones.\n5. Safe Mode 'OpenGL Software': prueba si el crash es por la GPU. Si en este modo NO crashea, el problema es el driver de la GPU.\n6. Safe Mode 'Bypass Tools/Options': prueba si el crash es por una configuración personalizada.\n7. Revisa el Visor de eventos de Windows: eventvwr > Registros de Windows > Aplicación > busca errores de SOLIDWORKS.\n8. Archivos de crash: revisa C:\\Users\\TuUsuario\\AppData\\Local\\SOLIDWORKS\\CXPA para encontrar logs detallados.\n9. Si nada funciona, repara la instalación: Panel de Control > Programas > SOLIDWORKS > Modificar > Reparar.\n10. Como último recurso, desinstalación limpia y reinstalación."
+    },
+    {
+      "codigo": "source_folder",
+      "titulo": "Error 'The source folder is not versioned properly'",
+      "causas": [
+        "Archivos de instalación descargados incorrectamente o corruptos",
+        "Descarga incompleta del Installation Manager",
+        "Carpeta de descarga en una ruta de red inaccesible"
+      ],
+      "solucion": "1. Elimina completamente la carpeta de descarga de SolidWorks.\n2. Descarga nuevamente el Installation Manager desde el portal de clientes.\n3. Asegúrate de descargar a una carpeta local (no en red ni en OneDrive/Dropbox).\n4. Verifica que la descarga se complete al 100% sin interrupciones.\n5. Ejecuta el Installation Manager como administrador."
+    },
+    {
+      "codigo": "electrical",
+      "titulo": "Errores de instalación de SolidWorks Electrical",
+      "causas": [
+        "Puertos del firewall bloqueados (1433 y 26666)",
+        "SQL Server no instalado o no accesible",
+        "Base de datos con el mismo nombre ya existe",
+        "Antivirus bloqueando registro de DLLs"
+      ],
+      "solucion": "1. Verifica que los puertos 1433 y 26666 estén abiertos: abre CMD y ejecuta 'telnet nombredelservidor 1433'. Si se abre una pantalla en blanco, el puerto está abierto.\n2. Desactiva temporalmente el antivirus durante la instalación (los antivirus pueden impedir que las DLLs se registren correctamente).\n3. Si la base de datos ya existe, elimínala desde SQL Server Management Studio antes de reinstalar.\n4. Asegúrate de que SQL Server esté corriendo: services.msc > busca 'SQL Server' > debe estar en estado 'Running'.\n5. Si nada funciona, desinstala SolidWorks Electrical, limpia la base de datos SQL, y reinstala."
     }
   ],
   "tipos_licencia": {
@@ -366,7 +445,7 @@
       ]
     }
   },
-  "documentacion_contexto": "SolidWorks es un software CAD 3D paramétrico desarrollado por Dassault Systèmes, utilizado globalmente para diseño mecánico, simulación FEA/CFD, PDM, manufactura (CAM), diseño eléctrico y documentación técnica. La instalación se realiza a través del SolidWorks Installation Manager (SLDIM), un asistente que gestiona la descarga, instalación y configuración de todos los productos del paquete SolidWorks.\n\nRequisitos clave: Windows 10/11 de 64 bits, mínimo 16 GB RAM (32 GB recomendado), GPU certificada con OpenGL 4.5, SSD recomendado, .NET Framework 4.8+, conexión a internet para activación. NO funciona en macOS/Linux nativamente.\n\nTipos de licencia: Standalone (un equipo), SolidNetWork/SNL (flotante en red, puertos 25734-25735), Online Licensing (vinculada a SOLIDWORKS ID).\n\nProblemas frecuentes: error 1603 (permisos/antivirus), 0xc0000142 (DLLs/.NET), problemas gráficos (GPU/drivers), errores de licencia (serial/activación/SNL), rendimiento lento (RAM/HDD/add-ins), crashes (drivers GPU/add-ins conflictivos).\n\nHerramientas de diagnóstico: SolidWorks Rx (incluida), modo seguro (sldworks.exe /safemode), logs en AppData\\Local\\Temp.\n\nCADSO es revendedor autorizado de SolidWorks en Perú y ofrece soporte técnico especializado, capacitación y licenciamiento.",
+  "documentacion_contexto": "SolidWorks es un software CAD 3D paramétrico desarrollado por Dassault Systèmes, utilizado globalmente para diseño mecánico, simulación FEA/CFD, PDM, manufactura (CAM), diseño eléctrico y documentación técnica. La instalación se realiza a través del SolidWorks Installation Manager (SLDIM).\n\nRequisitos: Windows 10/11 64 bits, 16GB RAM (32GB recomendado), GPU certificada OpenGL 4.5, SSD, .NET Framework 4.8+, internet para activación.\n\nTipos de licencia: Standalone, SolidNetWork/SNL (puertos 25734-25735), Online Licensing (SOLIDWORKS ID).\n\nErrores de instalación: 1603 (permisos/antivirus), 1606 (Shell Folders corruptos), 1642 (parche corrupto), 0xc0000142 (DLLs/.NET), 0xc000007b (32/64 bits mezclados), reboot pending (reinicio pendiente), entitlement check (firewall/internet), 'newer version installed' (conflicto VBA 7.1), 'previous toolbox detected' (reparar instalación), 'source folder not versioned' (descarga corrupta).\n\nProblemas gráficos: GPU integrada Intel usándose en vez de dedicada NVIDIA/AMD, drivers genéricos vs certificados, OpenGL no soportado. Solución: Panel de control NVIDIA > Configuración de programa > SLDWORKS.exe > Procesador de alto rendimiento. O Configuración Windows > Gráficos > Alto rendimiento.\n\nDiagnóstico de crashes: SolidWorks Rx (Safe Mode OpenGL, Bypass Tools/Options), Event Viewer (eventvwr > Aplicación), archivos CXPA en AppData\\Local\\SOLIDWORKS\\CXPA, modo seguro sldworks.exe /safemode.\n\nSolidWorks Electrical: requiere puertos 1433 y 26666 abiertos, SQL Server corriendo, desactivar antivirus para registro de DLLs.\n\nRendimiento lento: verificar RAM, mover a SSD, desactivar add-ins innecesarios, modo Ligero para ensamblajes grandes, archivos locales (no en red/nube).\n\nCADSO es revendedor autorizado de SolidWorks en Perú. Ofrece soporte técnico, capacitación y licenciamiento. Fuentes de referencia: documentación oficial de Dassault Systèmes, GoEngineer, Javelin Technologies, TriMech.",
   "whatsapp": {
     "numero": "51967152992",
     "mensaje_predeterminado": "Hola CADSO, necesito ayuda con la instalación de SolidWorks. "
