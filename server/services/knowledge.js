@@ -14,6 +14,11 @@ const KEYWORDS = {
   crash: ['crash', 'crashea', 'se cierra', 'se cierra solo', 'se cuelga', 'se congela', 'se traba', 'pantalla azul', 'dejo de funcionar'],
   productos: ['standard', 'professional', 'premium', 'que incluye', 'diferencia', 'paquetes', 'planes', 'tipos de solidworks'],
   tipo_licencia: ['tipo de licencia', 'licencia de red', 'licencia flotante', 'standalone', 'solidnetwork', 'snl', 'online licensing'],
+  simulation: ['simulation', 'simulacion', 'simulación', 'mesh', 'mallado', 'solver', 'analisis', 'fea', 'esfuerzos', 'elementos finitos'],
+  pdm: ['pdm', 'vault', 'bóveda', 'base de datos', 'archivo servidor', 'archive server', 'gestion de datos'],
+  electrical: ['electrical', 'electrico', 'eléctrico', 'esquematico', 'sql server'],
+  visualize: ['visualize', 'renderizado', 'render', 'renderizar', 'foto realista'],
+  draftsight: ['draftsight', 'dwg', 'autocad', 'dibujo 2d'],
 };
 
 function normalize(text) {

@@ -382,6 +382,104 @@
         "Antivirus bloqueando registro de DLLs"
       ],
       "solucion": "1. Verifica que los puertos 1433 y 26666 estén abiertos: abre CMD y ejecuta 'telnet nombredelservidor 1433'. Si se abre una pantalla en blanco, el puerto está abierto.\n2. Desactiva temporalmente el antivirus durante la instalación (los antivirus pueden impedir que las DLLs se registren correctamente).\n3. Si la base de datos ya existe, elimínala desde SQL Server Management Studio antes de reinstalar.\n4. Asegúrate de que SQL Server esté corriendo: services.msc > busca 'SQL Server' > debe estar en estado 'Running'.\n5. Si nada funciona, desinstala SolidWorks Electrical, limpia la base de datos SQL, y reinstala."
+    },
+    {
+      "codigo": "mesh_fail",
+      "titulo": "Error de mallado (Mesh Failure) en SolidWorks Simulation",
+      "causas": [
+        "Tamaño de elemento de mesh más grande que las caras o características del modelo",
+        "Cuerpos o partes que interfieren entre sí en el ensamblaje",
+        "Geometría con caras inválidas, aristas cortas o caras tipo sliver",
+        "Incompatibilidad de mesh entre componentes"
+      ],
+      "solucion": "1. Ejecuta Tools > Evaluate > Check para detectar caras o aristas inválidas.\n2. En ensamblajes, ejecuta Interference Check para identificar partes conflictivas.\n3. Cambia de 'Standard Mesh' a 'Curvature-Based Mesh' (se adapta mejor a curvas y agujeros).\n4. Reduce los valores máximo y mínimo del tamaño de elemento.\n5. Aplica Mesh Controls en las zonas problemáticas: clic derecho en la cara > Apply Mesh Control > reduce el tamaño.\n6. Suprime características cosméticas que no afectan los resultados (filetes pequeños, logos, textos).\n7. Usa la función Split para dividir el modelo y detectar dónde falla el mesh.\n8. En opciones avanzadas: activa 'Remesh failed parts with incompatible mesh' y selecciona 'More accurate (slower)'.\n9. Si nada funciona, crea un mesh Draft Quality muy grueso primero para verificar que el modelo es válido."
+    },
+    {
+      "codigo": "simulation_inestable",
+      "titulo": "Error 'Model is unstable' o solver crash en SolidWorks Simulation",
+      "causas": [
+        "Un cuerpo dentro del análisis no está completamente restringido",
+        "Faltan condiciones de contorno (fixtures/constraints)",
+        "Contactos entre partes mal definidos",
+        "Mesh demasiado grueso para capturar el comportamiento del modelo"
+      ],
+      "solucion": "1. Verifica que todas las partes tengan restricciones (fixtures) apropiadas - el modelo no puede tener movimiento libre.\n2. En Study Properties, activa 'Use soft springs to stabilize the model' - esto aplica resortes débiles para contrarrestar la inestabilidad.\n3. Suprime todos los Mesh Controls y crea un mesh Draft Quality muy grueso.\n4. Cambia el solver a 'Intel Direct Sparse' para mayor estabilidad.\n5. Revisa los contactos entre componentes: usa 'Find Contact Sets' para detectar contactos faltantes.\n6. Si el error persiste, simplifica el modelo eliminando componentes uno por uno hasta identificar cuál causa la inestabilidad."
+    },
+    {
+      "codigo": "simulation_corruption",
+      "titulo": "Bug de corrupción de estudios en SolidWorks Simulation 2025",
+      "causas": [
+        "Bug conocido BR10000400636 en SolidWorks 2025 SP1.2 y SP2",
+        "Cambiar entre documentos de SolidWorks con el add-in de Simulation activado",
+        "Los estudios se corrompen o eliminan automáticamente"
+      ],
+      "solucion": "1. Este es un bug confirmado por Dassault Systèmes, corregido en SolidWorks 2025 SP3.\n2. Actualiza a SolidWorks 2025 SP3 o posterior.\n3. Mientras tanto, evita cambiar entre documentos con el add-in de Simulation activo.\n4. Activa los backups: Herramientas > Opciones > Sistema > Backup/Recover > configura 5-10 copias por documento.\n5. Guarda frecuentemente antes de cambiar de archivo."
+    },
+    {
+      "codigo": "pdm_conexion",
+      "titulo": "Error de conexión al Vault de SolidWorks PDM",
+      "causas": [
+        "Servidor de archivo (Archive Server) no está corriendo",
+        "SQL Server no accesible o credenciales incorrectas",
+        "Puertos de red bloqueados (3030, 1433, 1434)",
+        "Versiones incompatibles entre cliente y servidor PDM",
+        "Claves de registro apuntando al servidor equivocado"
+      ],
+      "solucion": "1. Verifica que estos servicios estén activos (services.msc): SOLIDWORKS PDM Archive Server, SOLIDWORKS PDM Database Server, SQL Server.\n2. Comprueba conectividad: ejecuta 'ping nombredelservidor' y 'telnet nombredelservidor 3030' desde el cliente.\n3. Puertos requeridos: 3030 (Archive Server), 1433/1434 (SQL Server), 25734-25735 (License Manager).\n4. Revisa los logs en la herramienta de administración de PDM (los más recientes están al final de la lista).\n5. Verifica las versiones: cliente y servidor deben estar en la misma versión anual.\n6. En el Registro de Windows, verifica: HKLM\\SOFTWARE\\SolidWorks\\Applications\\PDMWorks Enterprise\\Databases\\[Vault] - revisa las claves DbServer y ServerLoc.\n7. En SQL Server Configuration Manager: confirma que TCP Port = 1433 y TCP Dynamic Ports esté vacío."
+    },
+    {
+      "codigo": "pdm_login",
+      "titulo": "Error de login en SolidWorks PDM - credenciales inválidas",
+      "causas": [
+        "Contraseña de Windows diferente a la contraseña de PDM",
+        "PDM intenta autenticar con la cuenta local en vez del dominio",
+        "Cuenta SQL bloqueada por demasiados intentos fallidos",
+        "Active Directory no configurado correctamente"
+      ],
+      "solucion": "1. PDM intenta autenticar primero con la cuenta local, luego con el dominio. Si las contraseñas difieren, falla.\n2. Sincroniza la contraseña de Windows con la de PDM.\n3. En SQL Server Management Studio: verifica que la cuenta SA no esté bloqueada (Security > Logins > sa > Status).\n4. Re-ingresa las credenciales SQL en la configuración del servidor PDM.\n5. Si usas Active Directory, verifica que el usuario esté en el grupo correcto y que la política de grupo permita el acceso."
+    },
+    {
+      "codigo": "visualize_memoria",
+      "titulo": "Error de memoria insuficiente en SolidWorks Visualize",
+      "causas": [
+        "Menos de 8 GB de RAM disponible",
+        "GPU con menos de 4 GB de VRAM",
+        "Escenas muy complejas con muchas texturas de alta resolución",
+        "Driver de GPU desactualizado"
+      ],
+      "solucion": "1. Verifica que tengas al menos 16 GB de RAM (32 GB recomendado para Visualize).\n2. Actualiza el driver de tu GPU a la versión más reciente del fabricante.\n3. Reduce la resolución de las texturas en la escena.\n4. Cierra otros programas que consuman memoria antes de usar Visualize.\n5. En Visualize: Herramientas > Opciones > Rendimiento, reduce la calidad de preview.\n6. Si usas GPU NVIDIA, verifica que Visualize use la GPU dedicada y no la integrada."
+    },
+    {
+      "codigo": "draftsight_addin",
+      "titulo": "Error 'Cannot open file in DraftSight' desde SolidWorks Electrical",
+      "causas": [
+        "Add-in de SolidWorks Electrical no activado en DraftSight",
+        "DraftSight no instalado o versión incompatible",
+        "Asociación de archivos DWG incorrecta"
+      ],
+      "solucion": "1. Abre DraftSight independientemente.\n2. Ve a Tools > Add-Ins.\n3. Activa 'SOLIDWORKS Electrical Add-in'.\n4. Cierra DraftSight y vuelve a intentar desde SolidWorks Electrical.\n5. Si no aparece el add-in, verifica que DraftSight sea la versión Professional o superior.\n6. Reinstala DraftSight si el problema persiste."
+    },
+    {
+      "codigo": "splash_crash",
+      "titulo": "SolidWorks se crashea en la pantalla de inicio (Splash Screen)",
+      "causas": [
+        "Archivo libcef.dll (Chromium Embedded Framework) corrupto",
+        "Actualización de Microsoft Edge WebView2 Runtime incompatible",
+        "Conflicto entre add-ins (SolidProfessor + 3DEXPERIENCE)",
+        "Driver de GPU AMD desactualizado"
+      ],
+      "solucion": "1. Si el error menciona libcef.dll: reemplaza el archivo con la versión 100.0.14.0 (búscalo en la carpeta de instalación de SolidWorks).\n2. Si usas SolidWorks 2025 SP5 o 2026: verifica si hay un HotFix disponible (QA00000445516) por conflicto con Edge WebView2.\n3. Si tienes SolidProfessor: deja los add-ins de 3DEXPERIENCE activos al iniciar y SolidProfessor desactivado. Activa SolidProfessor manualmente después de abrir SolidWorks.\n4. Si usas GPU AMD: desinstala y reinstala el driver de AMD.\n5. Intenta abrir SolidWorks en Safe Mode: sldworks.exe /safemode.\n6. Como último recurso, repara la instalación desde Panel de Control."
+    },
+    {
+      "codigo": "archivo_corrupto",
+      "titulo": "Archivo de SolidWorks corrupto - error al abrir documento",
+      "causas": [
+        "Corte de energía o crash durante el guardado",
+        "Archivo guardado en red inestable o en la nube (OneDrive/Dropbox)",
+        "Conflicto de versiones entre componentes de un ensamblaje",
+        "Disco duro con sectores dañados"
+      ],
+      "solucion": "1. Intenta abrir con modo Recuperar: Archivo > Abrir > selecciona el archivo > cambia 'Modo' a 'Recuperar'.\n2. Si es un ensamblaje, ábrelo en modo 'Ligero' para identificar qué componente está corrupto.\n3. Busca archivos de backup: SolidWorks crea copias en la misma carpeta con extensión .sldprt.bak o .sldasm.bak.\n4. Si usas PDM, recupera una versión anterior del archivo desde el vault.\n5. Revisa si hay un archivo de auto-recuperación en: C:\\Users\\TuUsuario\\AppData\\Local\\TempSWBackupDirectory.\n6. Para prevenir: siempre guarda archivos localmente (no en red/nube), activa backups automáticos en Herramientas > Opciones > Backup/Recover."
     }
   ],
   "tipos_licencia": {
