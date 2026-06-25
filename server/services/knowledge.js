@@ -19,6 +19,14 @@ const KEYWORDS = {
   electrical: ['electrical', 'electrico', 'eléctrico', 'esquematico', 'sql server'],
   visualize: ['visualize', 'renderizado', 'render', 'renderizar', 'foto realista'],
   draftsight: ['draftsight', 'dwg', 'autocad', 'dibujo 2d'],
+  que_es: ['que es solidworks', 'qué es solidworks', 'para que sirve', 'para qué sirve', 'que hace solidworks', 'definicion', 'definición'],
+  formatos: ['formato', 'extension', 'extensión', 'sldprt', 'sldasm', 'slddrw', 'step', 'iges', 'stl', 'importar', 'exportar', 'abrir archivo'],
+  composer: ['composer', 'documentacion tecnica', 'instrucciones de ensamblaje', 'manual tecnico'],
+  cam: ['cam', 'cnc', 'fresado', 'mecanizado', 'manufactura', 'toolpath'],
+  plastics: ['plastics', 'inyeccion', 'inyección', 'molde', 'plastico', 'plástico'],
+  edrawings: ['edrawings', 'visor', 'visualizar sin solidworks', 'ver archivo'],
+  experiencia3d: ['3dexperience', '3d experience', 'nube', 'cloud', 'plataforma', 'colaboracion en linea'],
+  flow: ['flow simulation', 'fluidos', 'cfd', 'flujo', 'aerodinamica', 'aerodinámica', 'ventilacion', 'ventilación'],
 };
 
 function normalize(text) {
@@ -222,6 +230,137 @@ function getResponse(message) {
           `**${lic.standalone.nombre}:**\n${lic.standalone.descripcion}\n\n` +
           `**${lic.network.nombre}:**\n${lic.network.descripcion}\n\n` +
           `**${lic.online.nombre}:**\n${lic.online.descripcion}`,
+      };
+    }
+
+    case 'que_es': {
+      const q = data.que_es_solidworks;
+      return {
+        answered: true,
+        response: `📐 **¿Qué es SolidWorks?**\n\n${q.definicion}\n\n` +
+          `**¿Para qué sirve?**\n${q.para_que_sirve.map(u => `• ${u}`).join('\n')}\n\n` +
+          `**Industrias:** ${q.industrias.join(', ')}`,
+      };
+    }
+
+    case 'formatos': {
+      const f = data.que_es_solidworks.formatos_archivo;
+      return {
+        answered: true,
+        response: `📁 **Formatos de archivo de SolidWorks**\n\n` +
+          `**Archivos nativos:**\n${Object.entries(f.nativos).map(([ext, desc]) => `• **${ext}** — ${desc}`).join('\n')}\n\n` +
+          `**Importación:** ${f.importacion.join(', ')}\n\n` +
+          `**Exportación:** ${f.exportacion.join(', ')}`,
+      };
+    }
+
+    case 'simulation': {
+      const s = data.productos_detallados.solidworks_simulation;
+      return {
+        answered: true,
+        response: `🔬 **${s.nombre}**\n\n${s.que_es}\n\n` +
+          `**Capacidades:**\n${s.capacidades.map(c => `• ${c}`).join('\n')}\n\n` +
+          `**¿Cuándo usar?** ${s.cuando_usar}`,
+      };
+    }
+
+    case 'pdm': {
+      const p = data.productos_detallados.solidworks_pdm;
+      return {
+        answered: true,
+        response: `🗄️ **${p.nombre}**\n\n${p.que_es}\n\n` +
+          `**Capacidades:**\n${p.capacidades.map(c => `• ${c}`).join('\n')}\n\n` +
+          `**Versiones:**\n• **PDM Standard:** ${p.versiones_pdm['PDM Standard']}\n• **PDM Professional:** ${p.versiones_pdm['PDM Professional']}`,
+      };
+    }
+
+    case 'electrical': {
+      const e = data.productos_detallados.solidworks_electrical;
+      return {
+        answered: true,
+        response: `⚡ **${e.nombre}**\n\n${e.que_es}\n\n` +
+          `**Capacidades:**\n${e.capacidades.map(c => `• ${c}`).join('\n')}\n\n` +
+          `**¿Cuándo usar?** ${e.cuando_usar}`,
+      };
+    }
+
+    case 'visualize': {
+      const v = data.productos_detallados.solidworks_visualize;
+      return {
+        answered: true,
+        response: `🎨 **${v.nombre}**\n\n${v.que_es}\n\n` +
+          `**Capacidades:**\n${v.capacidades.map(c => `• ${c}`).join('\n')}\n\n` +
+          `**¿Cuándo usar?** ${v.cuando_usar}`,
+      };
+    }
+
+    case 'composer': {
+      const c = data.productos_detallados.solidworks_composer;
+      return {
+        answered: true,
+        response: `📝 **${c.nombre}**\n\n${c.que_es}\n\n` +
+          `**Capacidades:**\n${c.capacidades.map(c => `• ${c}`).join('\n')}\n\n` +
+          `**¿Cuándo usar?** ${c.cuando_usar}`,
+      };
+    }
+
+    case 'cam': {
+      const c = data.productos_detallados.solidworks_cam;
+      return {
+        answered: true,
+        response: `🏭 **${c.nombre}**\n\n${c.que_es}\n\n` +
+          `**Capacidades:**\n${c.capacidades.map(c => `• ${c}`).join('\n')}\n\n` +
+          `**¿Cuándo usar?** ${c.cuando_usar}`,
+      };
+    }
+
+    case 'plastics': {
+      const p = data.productos_detallados.solidworks_plastics;
+      return {
+        answered: true,
+        response: `🧪 **${p.nombre}**\n\n${p.que_es}\n\n` +
+          `**Capacidades:**\n${p.capacidades.map(c => `• ${c}`).join('\n')}\n\n` +
+          `**¿Cuándo usar?** ${p.cuando_usar}`,
+      };
+    }
+
+    case 'draftsight': {
+      const d = data.productos_detallados.draftsight;
+      return {
+        answered: true,
+        response: `📏 **${d.nombre}**\n\n${d.que_es}\n\n` +
+          `**Capacidades:**\n${d.capacidades.map(c => `• ${c}`).join('\n')}\n\n` +
+          `**¿Cuándo usar?** ${d.cuando_usar}`,
+      };
+    }
+
+    case 'edrawings': {
+      const e = data.productos_detallados.edrawings;
+      return {
+        answered: true,
+        response: `👁️ **${e.nombre}**\n\n${e.que_es}\n\n` +
+          `**Capacidades:**\n${e.capacidades.map(c => `• ${c}`).join('\n')}\n\n` +
+          `**¿Cuándo usar?** ${e.cuando_usar}`,
+      };
+    }
+
+    case 'experiencia3d': {
+      const x = data.productos_detallados['3dexperience'];
+      return {
+        answered: true,
+        response: `☁️ **${x.nombre}**\n\n${x.que_es}\n\n` +
+          `**Capacidades:**\n${x.capacidades.map(c => `• ${c}`).join('\n')}\n\n` +
+          `**Diferencia vs Desktop:** ${x.diferencia_vs_desktop}`,
+      };
+    }
+
+    case 'flow': {
+      const f = data.productos_detallados.solidworks_flow_simulation;
+      return {
+        answered: true,
+        response: `💨 **${f.nombre}**\n\n${f.que_es}\n\n` +
+          `**Capacidades:**\n${f.capacidades.map(c => `• ${c}`).join('\n')}\n\n` +
+          `**¿Cuándo usar?** ${f.cuando_usar}`,
       };
     }
 

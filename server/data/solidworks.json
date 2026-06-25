@@ -499,6 +499,200 @@
       "como_activar": "En SolidWorks: Ayuda > Licencias > Activar/Desactivar > Inicio de sesión en SOLIDWORKS ID."
     }
   },
+  "que_es_solidworks": {
+    "definicion": "SolidWorks es un software de diseño asistido por computadora (CAD) 3D paramétrico desarrollado por Dassault Systèmes. Permite crear modelos 3D de piezas y ensamblajes, generar planos 2D, realizar simulaciones de ingeniería y crear documentación técnica. Es el estándar de la industria para diseño mecánico, utilizado por más de 3.8 millones de ingenieros y diseñadores en el mundo.",
+    "empresa": "Dassault Systèmes (Francia). SolidWorks fue fundado en 1993 por Jon Hirschtick y adquirido por Dassault Systèmes en 1997.",
+    "para_que_sirve": [
+      "Diseño mecánico de productos y máquinas",
+      "Modelado 3D paramétrico de piezas y ensamblajes",
+      "Generación de planos técnicos 2D con acotado y tolerancias",
+      "Simulación de esfuerzos, térmicos, de fluidos y de movimiento",
+      "Diseño de chapa metálica, piezas soldadas y moldes",
+      "Diseño eléctrico y enrutamiento de cables/tuberías",
+      "Renderizado fotorealista y animaciones",
+      "Documentación técnica y manuales de ensamblaje",
+      "Gestión de datos de ingeniería (PDM)",
+      "Manufactura asistida por computadora (CAM)"
+    ],
+    "industrias": ["Automotriz", "Aeroespacial", "Maquinaria industrial", "Dispositivos médicos", "Electrónica de consumo", "Energía", "Construcción", "Educación", "Robótica", "Manufactura general"],
+    "formatos_archivo": {
+      "nativos": {
+        ".sldprt": "Archivo de pieza 3D",
+        ".sldasm": "Archivo de ensamblaje",
+        ".slddrw": "Archivo de dibujo/plano 2D",
+        ".sldlfp": "Archivo de pieza de biblioteca",
+        ".slddrt": "Plantilla de dibujo"
+      },
+      "importacion": ["STEP (.stp/.step)", "IGES (.igs/.iges)", "Parasolid (.x_t/.x_b)", "ACIS (.sat)", "STL (.stl)", "DXF/DWG (AutoCAD)", "3D PDF", "OBJ", "CATIA (.CATPart/.CATProduct)", "Pro/E/Creo (.prt/.asm)", "Inventor (.ipt/.iam)", "Solid Edge (.par/.asm)", "JT (.jt)"],
+      "exportacion": ["STEP", "IGES", "Parasolid", "STL (para impresión 3D)", "DXF/DWG", "PDF/3D PDF", "eDrawings", "OBJ", "VRML", "IFC (construcción)"]
+    },
+    "conceptos_clave": {
+      "parametrico": "El diseño paramétrico significa que las dimensiones y relaciones definen la geometría. Si cambias una dimensión, todo el modelo se actualiza automáticamente.",
+      "feature_based": "SolidWorks trabaja con operaciones (features) que se aplican secuencialmente: extruir, cortar, redondear, etc. Cada operación se registra en el Árbol de FeatureManager.",
+      "ensamblaje": "Múltiples piezas se combinan en un ensamblaje usando relaciones de posición (mates): coincidencia, concentricidad, tangencia, distancia, etc.",
+      "plano_2d": "Los dibujos 2D se generan automáticamente desde el modelo 3D. Las vistas, cotas y anotaciones se vinculan al modelo — si el modelo cambia, el plano se actualiza.",
+      "sketch": "Los sketches (bocetos 2D) son la base de casi todas las operaciones 3D. Se dibujan en un plano y luego se extruyen, cortan, revolucionan, etc."
+    }
+  },
+  "productos_detallados": {
+    "solidworks_simulation": {
+      "nombre": "SolidWorks Simulation",
+      "que_es": "Herramienta de análisis de elementos finitos (FEA) integrada en SolidWorks. Permite simular cómo se comportará tu diseño bajo condiciones reales antes de fabricar prototipos.",
+      "capacidades": [
+        "Análisis estático de esfuerzos y deformaciones",
+        "Análisis de frecuencia y vibración",
+        "Análisis térmico (transferencia de calor)",
+        "Análisis de fatiga (vida útil del producto)",
+        "Análisis de pandeo (estabilidad estructural)",
+        "Análisis no lineal (grandes deformaciones, contactos)",
+        "Análisis dinámico (cargas variables en el tiempo)",
+        "Optimización de diseño (reducción de peso manteniendo resistencia)"
+      ],
+      "cuando_usar": "Antes de fabricar prototipos físicos. Permite verificar si una pieza resistirá las cargas de uso, encontrar puntos débiles, y optimizar el diseño para reducir material y costo."
+    },
+    "solidworks_flow_simulation": {
+      "nombre": "SolidWorks Flow Simulation",
+      "que_es": "Herramienta de dinámica de fluidos computacional (CFD) que simula el flujo de aire, líquidos y transferencia de calor dentro y alrededor de tus diseños.",
+      "capacidades": [
+        "Simulación de flujo de aire (aerodinámica, ventilación)",
+        "Simulación de flujo de líquidos (tuberías, bombas)",
+        "Transferencia de calor (enfriamiento de electrónica, HVAC)",
+        "Análisis de caída de presión",
+        "Visualización de líneas de flujo y distribución de temperatura"
+      ],
+      "cuando_usar": "Para diseñar sistemas de ventilación, enfriamiento de electrónica, ductos de aire, sistemas hidráulicos, o cualquier producto donde el flujo de fluidos sea importante."
+    },
+    "solidworks_pdm": {
+      "nombre": "SolidWorks PDM (Product Data Management)",
+      "que_es": "Sistema de gestión de datos de producto que almacena, organiza y controla todos los archivos de ingeniería en un vault (bóveda) seguro. Gestiona versiones, revisiones y flujos de trabajo.",
+      "capacidades": [
+        "Almacenamiento seguro y centralizado de archivos (vault)",
+        "Control de versiones y revisiones automático",
+        "Flujos de trabajo (workflows) para aprobaciones y ECOs",
+        "Búsqueda avanzada por metadatos y propiedades",
+        "Check-in/Check-out para evitar conflictos de edición",
+        "Generación automática de BOM (lista de materiales)",
+        "Integración con SolidWorks, Office y otros programas",
+        "Notificaciones por correo de cambios y tareas"
+      ],
+      "versiones_pdm": {
+        "PDM Standard": "Incluido con SolidWorks Professional y Premium. Para equipos pequeños (hasta ~20 usuarios). Solo archivos de SolidWorks.",
+        "PDM Professional": "Licencia separada. Para equipos grandes, multi-sitio. Soporta cualquier tipo de archivo, flujos de trabajo complejos, replicación de datos."
+      },
+      "cuando_usar": "Cuando trabajas en equipo y necesitas control de versiones, evitar sobrescribir archivos de otros, y tener trazabilidad de quién cambió qué y cuándo."
+    },
+    "solidworks_electrical": {
+      "nombre": "SolidWorks Electrical",
+      "que_es": "Herramienta de diseño eléctrico para crear esquemáticos de potencia, control y PLC, integrada con el diseño mecánico 3D de SolidWorks para un flujo electromecánico completo.",
+      "capacidades": [
+        "Diseño de esquemáticos eléctricos (potencia, control, PLC)",
+        "Biblioteca de componentes eléctricos (más de 500,000 partes)",
+        "Numeración automática de cables y componentes",
+        "Generación automática de reportes y BOM eléctricos",
+        "Integración bidireccional con SolidWorks 3D para enrutamiento de cables",
+        "Diseño de arneses de cables (harness)",
+        "Publicación automática de PDFs con hipervínculos"
+      ],
+      "cuando_usar": "Para diseñar tableros eléctricos, paneles de control, sistemas de automatización, o cualquier producto que combine diseño mecánico y eléctrico."
+    },
+    "solidworks_visualize": {
+      "nombre": "SolidWorks Visualize",
+      "que_es": "Herramienta de renderizado fotorealista que crea imágenes, animaciones y experiencias de realidad virtual de calidad profesional a partir de modelos CAD.",
+      "capacidades": [
+        "Renderizado fotorealista con iluminación global (ray tracing)",
+        "Materiales PBR (Physically Based Rendering) realistas",
+        "Animaciones de producto (rotación, explosión, ensamblaje)",
+        "Experiencias de realidad virtual (VR)",
+        "Renderizado por GPU (NVIDIA) para resultados rápidos",
+        "Importación directa desde SolidWorks y otros CAD",
+        "Escenas HDR y entornos de iluminación predefinidos",
+        "Renderizado en cola (batch) para múltiples variantes"
+      ],
+      "cuando_usar": "Para marketing, presentaciones a clientes, catálogos de productos, material publicitario. Crea imágenes realistas sin necesidad de fabricar prototipos físicos."
+    },
+    "solidworks_composer": {
+      "nombre": "SolidWorks Composer",
+      "que_es": "Herramienta para crear documentación técnica interactiva: instrucciones de ensamblaje, manuales de servicio, catálogos de repuestos y contenido de capacitación a partir de datos CAD 3D.",
+      "capacidades": [
+        "Instrucciones de ensamblaje paso a paso con vistas explosionadas",
+        "Manuales de mantenimiento y servicio interactivos",
+        "Catálogos de repuestos con BOM vinculados",
+        "Animaciones técnicas para capacitación",
+        "Exportación a HTML interactivo, PDF, imágenes SVG",
+        "Actualización automática cuando cambia el diseño CAD",
+        "Anotaciones, callouts y etiquetas técnicas"
+      ],
+      "cuando_usar": "Para documentar procesos de ensamblaje, crear manuales de usuario, capacitar personal de mantenimiento, o generar catálogos de repuestos. Ideal cuando el diseño cambia frecuentemente."
+    },
+    "solidworks_cam": {
+      "nombre": "SolidWorks CAM",
+      "que_es": "Herramienta de manufactura asistida por computadora integrada en SolidWorks. Genera trayectorias de herramienta (toolpaths) para fresado CNC directamente desde el modelo 3D.",
+      "capacidades": [
+        "Fresado 2.5 ejes y 3 ejes",
+        "Torneado CNC",
+        "Reconocimiento automático de features de manufactura",
+        "Generación de código G para máquinas CNC",
+        "Biblioteca de herramientas de corte",
+        "Simulación de mecanizado con detección de colisiones",
+        "Tolerancia basada en modelo (MBD)"
+      ],
+      "cuando_usar": "Para programar máquinas CNC directamente desde SolidWorks sin exportar a otro software CAM."
+    },
+    "solidworks_plastics": {
+      "nombre": "SolidWorks Plastics",
+      "que_es": "Herramienta de simulación de inyección de plástico que predice cómo el plástico fundido llenará un molde, identifica defectos y optimiza el diseño del molde y la pieza.",
+      "capacidades": [
+        "Simulación de llenado del molde",
+        "Predicción de líneas de soldadura y trampas de aire",
+        "Análisis de contracción y deformación (warpage)",
+        "Optimización de ubicación de puntos de inyección (gates)",
+        "Análisis de enfriamiento del molde",
+        "Balance de canales de alimentación (runners)"
+      ],
+      "cuando_usar": "Para diseñadores de piezas plásticas y fabricantes de moldes. Reduce iteraciones físicas del molde y minimiza defectos de manufactura."
+    },
+    "draftsight": {
+      "nombre": "DraftSight",
+      "que_es": "Editor de archivos DWG profesional de Dassault Systèmes. Es la alternativa a AutoCAD para crear, editar y visualizar dibujos 2D y modelos 3D en formato DWG/DXF.",
+      "capacidades": [
+        "Creación y edición de dibujos 2D en formato DWG/DXF",
+        "Modelado 3D básico",
+        "Acotado y anotaciones",
+        "Macros y automatización con LISP y VBA",
+        "Integración con SolidWorks Electrical",
+        "Comparación de dibujos (Design Compare)",
+        "Estándares CAD y verificación de capas"
+      ],
+      "cuando_usar": "Cuando necesitas trabajar con archivos DWG de AutoCAD sin pagar la licencia de AutoCAD, o cuando necesitas la integración con SolidWorks Electrical."
+    },
+    "edrawings": {
+      "nombre": "eDrawings",
+      "que_es": "Visor gratuito de archivos de SolidWorks, AutoCAD y otros formatos CAD. Permite ver, medir y anotar modelos 3D y planos 2D sin necesidad de tener SolidWorks instalado.",
+      "capacidades": [
+        "Visualización de archivos .sldprt, .sldasm, .slddrw",
+        "Visualización de archivos DWG, DXF, STEP, STL",
+        "Medición y acotado sobre el modelo",
+        "Vistas de sección y explosionadas",
+        "Anotaciones y marcado (markup)",
+        "Visualización en realidad aumentada (AR) con dispositivo móvil"
+      ],
+      "cuando_usar": "Para compartir diseños con clientes, proveedores o colegas que no tienen SolidWorks. Ideal para revisiones de diseño y aprobaciones."
+    },
+    "3dexperience": {
+      "nombre": "Plataforma 3DEXPERIENCE",
+      "que_es": "Plataforma empresarial en la nube de Dassault Systèmes que integra diseño, simulación, manufactura y colaboración. Permite a los equipos trabajar juntos desde cualquier lugar con datos centralizados.",
+      "capacidades": [
+        "Almacenamiento y gestión de datos en la nube",
+        "Colaboración en tiempo real entre equipos distribuidos",
+        "Control de versiones y revisiones en la nube",
+        "Compartir y marcar diseños sin instalar software (navegador web)",
+        "Gestión de proyectos y tareas",
+        "Dashboard personalizable con métricas del proyecto",
+        "Roles modulares: solo pagas por lo que necesitas"
+      ],
+      "diferencia_vs_desktop": "SolidWorks Desktop guarda archivos localmente o en PDM. 3DEXPERIENCE SOLIDWORKS guarda todo en la nube de Dassault Systèmes, permitiendo acceso desde cualquier lugar y colaboración en tiempo real."
+    }
+  },
   "productos": {
     "solidworks_standard": {
       "nombre": "SolidWorks Standard",
