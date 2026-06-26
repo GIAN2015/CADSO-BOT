@@ -9,50 +9,128 @@
     ]
   },
   "requisitos": {
-    "solidworks_2025": {
-      "so": ["Windows 11 (64 bits)", "Windows 10 versión 21H2 o posterior (64 bits)"],
-      "so_no_soportado": ["Windows 8.1", "Windows 7", "macOS", "Linux", "Windows en ARM"],
-      "ram": "16 GB mínimo, 32 GB recomendado, 64 GB para ensamblajes grandes o simulación",
-      "procesador": "Intel Core i7 o i9 / AMD Ryzen 7 o 9, 3.0 GHz o superior, 64 bits. Procesadores Xeon recomendados para estaciones de trabajo profesionales.",
-      "nucleos": "4 núcleos mínimo, 8+ recomendado para simulación y renderizado",
-      "disco": "20 GB libres para instalación base, 30-50 GB recomendado con todos los productos. SSD NVMe fuertemente recomendado.",
-      "grafica": {
-        "certificadas": ["NVIDIA Quadro / RTX (serie A, T, RTX A)", "AMD Radeon Pro (serie W)", "NVIDIA GeForce RTX (funcional pero no certificada oficialmente)"],
-        "vram": "4 GB mínimo, 8 GB recomendado",
-        "api": "OpenGL 4.5 obligatorio",
-        "notas": [
-          "Las tarjetas integradas Intel UHD/Iris NO están certificadas y causan errores gráficos frecuentes",
-          "Usar drivers profesionales/certificados, no los drivers gaming genéricos",
-          "Lista oficial de GPUs certificadas: solidworks.com/sw/support/videocardtesting.html",
-          "NVIDIA Studio Drivers funcionan bien como alternativa a los Quadro drivers"
-        ]
+    "niveles": [
+      {
+        "nivel": "MÍNIMA",
+        "tipo": "PC",
+        "so": "Windows 10 / 11",
+        "ram": "16 GB",
+        "cpu_base": "3.3 GHz",
+        "cpu_turbo": "4.0 GHz",
+        "nucleos": 4,
+        "disco": "512 GB SSD",
+        "gpu_marca": "NVIDIA Quadro",
+        "gpu_modelo": "P1000",
+        "vram": "2 GB",
+        "piezas_referencia": "0 - 100"
       },
-      "resolucion": "1920x1080 mínimo, escalado DPI al 100% o 125% recomendado",
-      "net_framework": ".NET Framework 4.8 o superior (se instala automáticamente si falta)",
-      "net_desktop_runtime": ".NET Desktop Runtime 6.0 requerido para SolidWorks 2025",
-      "visual_cpp": "Visual C++ 2015-2022 Redistributable (se instala automáticamente)",
-      "navegador": "Microsoft Edge, Google Chrome o Firefox actualizado para eDrawings y portal",
-      "internet": "Necesaria para descarga, activación de licencia y actualizaciones",
-      "excel": "Microsoft Excel 2016 o posterior para tablas de diseño y BOM (opcional pero recomendado)",
-      "pdf": "Adobe Acrobat Reader para exportar/importar PDF 3D"
+      {
+        "nivel": "MEDIA",
+        "tipo": "PC",
+        "so": "Windows 10 / 11",
+        "ram": "32 GB",
+        "cpu_base": "3.7 GHz",
+        "cpu_turbo": "4.8 GHz",
+        "nucleos": 6,
+        "disco": "1 TB SSD",
+        "gpu_marca": "NVIDIA Quadro",
+        "gpu_modelo": "P2200",
+        "vram": "4 GB",
+        "piezas_referencia": "100 - 500"
+      },
+      {
+        "nivel": "MEDIA ALTA",
+        "tipo": "PC",
+        "so": "Windows 10 / 11",
+        "ram": "64 GB",
+        "cpu_base": "3.7 GHz",
+        "cpu_turbo": "5.5 GHz",
+        "nucleos": 8,
+        "disco": "2 TB SSD",
+        "gpu_marca": "NVIDIA Quadro",
+        "gpu_modelo": "P5000",
+        "vram": "8 GB",
+        "piezas_referencia": "500 - 5,000"
+      },
+      {
+        "nivel": "ALTA",
+        "tipo": "PC",
+        "so": "Windows 10 / 11",
+        "ram": "128 GB",
+        "cpu_base": "4.0 GHz",
+        "cpu_turbo": "5.5 GHz",
+        "nucleos": 16,
+        "disco": "3 TB SSD",
+        "gpu_marca": "NVIDIA Quadro",
+        "gpu_modelo": "RTX 8000",
+        "vram": "16 GB",
+        "piezas_referencia": "5,000 - 9,000"
+      }
+    ],
+    "perfiles": {
+      "disenador_cad": {
+        "titulo": "Diseñador CAD",
+        "prioridad": "Procesador (velocidad de reloj)",
+        "descripcion": "Para un diseñador lo primordial es la velocidad con la que se resuelven las operaciones de las piezas y los ensamblajes. La RAM y tarjeta de video dependen del número de componentes. También aplica para animación y renderizado básico."
+      },
+      "analista_fea_cfd": {
+        "titulo": "Analista FEA/CFD",
+        "prioridad": "Número de núcleos del procesador",
+        "descripcion": "Para simulación se debe considerar la cantidad de núcleos — a más núcleos, menor tiempo de simulación. La simulación se distribuye entre los núcleos, reduciendo el tiempo de cálculo en análisis estructural o de fluidos. La velocidad de reloj también es importante si además hace diseño CAD."
+      }
     },
-    "solidworks_2024": {
-      "so": ["Windows 11 (64 bits)", "Windows 10 versión 21H2 o posterior (64 bits)"],
-      "ram": "16 GB mínimo, 32 GB recomendado",
-      "procesador": "Intel o AMD de 64 bits, 3.0 GHz o superior",
-      "disco": "20 GB libres para instalación base, SSD recomendado",
-      "grafica": "GPU certificada con OpenGL 4.5, 4 GB VRAM mínimo",
-      "net_framework": ".NET Framework 4.8"
+    "nota_seleccion": "La configuración se debe elegir según el perfil del usuario, sus necesidades y la cantidad de componentes que maneja en sus ensamblajes.",
+    "so_no_soportado": ["Windows 8.1", "Windows 7", "macOS", "Linux", "Windows en ARM"],
+    "software_adicional": {
+      "net_framework": ".NET Framework 4.8 o superior",
+      "net_desktop_runtime": ".NET Desktop Runtime 6.0 (para SolidWorks 2025)",
+      "visual_cpp": "Visual C++ 2015-2022 Redistributable",
+      "navegador": "Microsoft Edge, Chrome o Firefox actualizado",
+      "excel": "Microsoft Excel 2016+ (opcional, para tablas de diseño y BOM)"
     },
     "notas_generales": [
-      "SolidWorks NO funciona en macOS ni Linux de forma nativa. Se puede usar con máquina virtual (VMware/Parallels) pero NO es soportado oficialmente y puede tener problemas de rendimiento gráfico.",
-      "Las tarjetas gráficas integradas (Intel UHD/Iris) pueden causar crashes, artefactos visuales y rendimiento pobre.",
-      "Se recomienda desactivar el antivirus (Windows Defender, Avast, Norton, Kaspersky, etc.) durante la instalación.",
-      "Windows debe estar completamente actualizado antes de instalar SolidWorks.",
-      "Si usas Windows 11, asegúrate de tener la versión 22H2 o posterior para mejor compatibilidad.",
-      "No se recomienda instalar SolidWorks en unidades de red, solo en discos locales.",
-      "Para entornos empresariales con más de 5 equipos, considerar instalación administrativa con imagen."
-    ]
+      "SolidWorks NO funciona en macOS ni Linux de forma nativa.",
+      "Las tarjetas gráficas integradas (Intel UHD/Iris) NO están certificadas y causan errores.",
+      "Se recomienda desactivar el antivirus durante la instalación.",
+      "Windows debe estar completamente actualizado antes de instalar.",
+      "No instalar SolidWorks en unidades de red, solo en discos locales.",
+      "Lista oficial completa: solidworks.com/sw/support/videocardtesting.html"
+    ],
+    "hardware_certificado": {
+      "nota": "Estas son las configuraciones más comunes certificadas por Dassault Systèmes. Para la lista completa (6800+ combinaciones) visita: solidworks.com/sw/support/videocardtesting.html",
+      "equipos": [
+        { "marca": "Dell", "modelo": "Precision 7560", "so": "Win 10/11", "gpu": "T1200", "sw_version": "2024/2025", "driver": "R535" },
+        { "marca": "Dell", "modelo": "Precision 7560", "so": "Win 10/11", "gpu": "RTX A2000", "sw_version": "2024/2025", "driver": "R535" },
+        { "marca": "Dell", "modelo": "Precision 7560", "so": "Win 10/11", "gpu": "RTX A3000", "sw_version": "2024/2025", "driver": "R535" },
+        { "marca": "Dell", "modelo": "Precision 7560", "so": "Win 10/11", "gpu": "RTX A4000", "sw_version": "2024/2025", "driver": "R535" },
+        { "marca": "Dell", "modelo": "Precision 7560", "so": "Win 10/11", "gpu": "RTX A5000", "sw_version": "2024/2025", "driver": "R535" },
+        { "marca": "Dell", "modelo": "Precision 5760", "so": "Win 10/11", "gpu": "RTX A2000", "sw_version": "2024/2025", "driver": "R535" },
+        { "marca": "Dell", "modelo": "Precision 7760", "so": "Win 10/11", "gpu": "RTX A3000", "sw_version": "2024/2025", "driver": "R535" },
+        { "marca": "Dell", "modelo": "Precision 7760", "so": "Win 10/11", "gpu": "RTX A5000", "sw_version": "2024/2025", "driver": "R535" },
+        { "marca": "Dell", "modelo": "Precision 3660", "so": "Win 10/11", "gpu": "RTX A2000", "sw_version": "2024/2025", "driver": "R535" },
+        { "marca": "Dell", "modelo": "Precision 3660", "so": "Win 10/11", "gpu": "RTX A4000", "sw_version": "2024/2025", "driver": "R535" },
+        { "marca": "Dell", "modelo": "Precision 5860", "so": "Win 10/11", "gpu": "RTX A4000", "sw_version": "2024/2025", "driver": "R535" },
+        { "marca": "Dell", "modelo": "Precision 5860", "so": "Win 10/11", "gpu": "RTX A5000", "sw_version": "2024/2025", "driver": "R535" },
+        { "marca": "HP", "modelo": "Z8 G5 Workstation", "so": "Win 10/11", "gpu": "AMD Radeon PRO W6600", "sw_version": "2024/2025", "driver": "AMD 23.Q3" },
+        { "marca": "HP", "modelo": "Z8 G5 Workstation", "so": "Win 10/11", "gpu": "AMD Radeon PRO W6800", "sw_version": "2024/2025", "driver": "AMD 23.Q3" },
+        { "marca": "HP", "modelo": "Z8 G5 Workstation", "so": "Win 10/11", "gpu": "T400 4GB", "sw_version": "2024/2025", "driver": "R535" },
+        { "marca": "HP", "modelo": "Z8 G5 Workstation", "so": "Win 10/11", "gpu": "T600", "sw_version": "2024/2025", "driver": "R535" },
+        { "marca": "HP", "modelo": "Z8 G5 Workstation", "so": "Win 10/11", "gpu": "RTX A4000", "sw_version": "2024/2025", "driver": "R535" },
+        { "marca": "HP", "modelo": "Z8 G5 Workstation", "so": "Win 10/11", "gpu": "RTX A5000", "sw_version": "2024/2025", "driver": "R535" },
+        { "marca": "HP", "modelo": "ZBook Fury 16 G9", "so": "Win 10/11", "gpu": "RTX A2000", "sw_version": "2024/2025", "driver": "R535" },
+        { "marca": "HP", "modelo": "ZBook Fury 16 G9", "so": "Win 10/11", "gpu": "RTX A3000", "sw_version": "2024/2025", "driver": "R535" },
+        { "marca": "HP", "modelo": "ZBook Fury 16 G9", "so": "Win 10/11", "gpu": "RTX A5500", "sw_version": "2024/2025", "driver": "R535" },
+        { "marca": "HP", "modelo": "Z4 G5 Workstation", "so": "Win 10/11", "gpu": "RTX A2000", "sw_version": "2024/2025", "driver": "R535" },
+        { "marca": "HP", "modelo": "Z4 G5 Workstation", "so": "Win 10/11", "gpu": "RTX A4000", "sw_version": "2024/2025", "driver": "R535" },
+        { "marca": "Lenovo", "modelo": "ThinkStation P3", "so": "Win 10/11", "gpu": "RTX A2000", "sw_version": "2024/2025", "driver": "R535" },
+        { "marca": "Lenovo", "modelo": "ThinkStation P3", "so": "Win 10/11", "gpu": "RTX A4000", "sw_version": "2024/2025", "driver": "R535" },
+        { "marca": "Lenovo", "modelo": "ThinkStation P360", "so": "Win 10/11", "gpu": "T1000", "sw_version": "2024/2025", "driver": "R535" },
+        { "marca": "Lenovo", "modelo": "ThinkStation P360", "so": "Win 10/11", "gpu": "RTX A2000", "sw_version": "2024/2025", "driver": "R535" },
+        { "marca": "Lenovo", "modelo": "ThinkPad P16 Gen 1", "so": "Win 10/11", "gpu": "RTX A3000", "sw_version": "2024/2025", "driver": "R535" },
+        { "marca": "Lenovo", "modelo": "ThinkPad P16 Gen 1", "so": "Win 10/11", "gpu": "RTX A5500", "sw_version": "2024/2025", "driver": "R535" },
+        { "marca": "Lenovo", "modelo": "ThinkPad P1 Gen 5", "so": "Win 10/11", "gpu": "RTX A2000", "sw_version": "2024/2025", "driver": "R535" }
+      ]
+    }
   },
   "versiones": {
     "disponibles": ["SolidWorks 2025 SP3", "SolidWorks 2025 SP2", "SolidWorks 2025 SP1", "SolidWorks 2025 SP0", "SolidWorks 2024 SP5"],

@@ -27,6 +27,7 @@ const KEYWORDS = {
   edrawings: ['edrawings', 'visor', 'visualizar sin solidworks', 'ver archivo'],
   experiencia3d: ['3dexperience', '3d experience', 'nube', 'cloud', 'plataforma', 'colaboracion en linea'],
   flow: ['flow simulation', 'fluidos', 'cfd', 'flujo', 'aerodinamica', 'aerodinámica', 'ventilacion', 'ventilación'],
+  hardware: ['hardware certificado', 'equipo certificado', 'tarjeta certificada', 'compatible solidworks', 'laptop para solidworks', 'workstation', 'precision', 'zbook', 'thinkstation', 'equipo recomendado', 'que laptop', 'que computadora', 'que pc comprar'],
 };
 
 function normalize(text) {
@@ -39,6 +40,7 @@ function normalize(text) {
 }
 
 const PRIORITY = {
+  hardware: 10,
   error: 10,
   crash: 10,
   lento: 10,
@@ -96,19 +98,33 @@ function formatInstalacion() {
 }
 
 function formatRequisitos() {
-  const r = data.requisitos.solidworks_2025;
+  const niveles = data.requisitos.niveles;
+  const perfiles = data.requisitos.perfiles;
   const notas = data.requisitos.notas_generales.map(n => `⚠️ ${n}`).join('\n');
-  return `💻 **Requisitos del sistema para SolidWorks 2025**\n\n` +
-    `• **Sistema operativo:** ${r.so.join(', ')}\n` +
-    `• **RAM:** ${r.ram}\n` +
-    `• **Procesador:** ${r.procesador}\n` +
-    `• **Núcleos:** ${r.nucleos}\n` +
-    `• **Disco duro:** ${r.disco}\n` +
-    `• **Tarjeta gráfica:** ${r.grafica.certificadas.join(', ')}\n` +
-    `• **VRAM:** ${r.grafica.vram}\n` +
-    `• **Resolución:** ${r.resolucion}\n` +
-    `• **.NET Framework:** ${r.net_framework}\n` +
-    `• **Internet:** ${r.internet}\n\n` +
+
+  const filas = niveles.map(n =>
+    `<tr>` +
+    `<td><strong>${n.nivel}</strong></td>` +
+    `<td>${n.so}</td>` +
+    `<td>${n.ram}</td>` +
+    `<td>${n.cpu_base}–${n.cpu_turbo}</td>` +
+    `<td>${n.nucleos}</td>` +
+    `<td>${n.disco}</td>` +
+    `<td>${n.gpu_modelo} (${n.vram})</td>` +
+    `<td>${n.piezas_referencia}</td>` +
+    `</tr>`
+  ).join('');
+
+  const tabla = `<div class="cadso-table-wrap"><table class="cadso-table">` +
+    `<thead><tr><th>Nivel</th><th>S.O.</th><th>RAM</th><th>CPU</th><th>Núcleos</th><th>Disco</th><th>GPU</th><th>Piezas</th></tr></thead>` +
+    `<tbody>${filas}</tbody></table></div>`;
+
+  return `💻 **Requisitos del sistema para SolidWorks**\n\n` +
+    tabla + `\n\n` +
+    `👤 **¿Qué perfil eres?**\n\n` +
+    `**${perfiles.disenador_cad.titulo}** — Prioridad: ${perfiles.disenador_cad.prioridad}\n${perfiles.disenador_cad.descripcion}\n\n` +
+    `**${perfiles.analista_fea_cfd.titulo}** — Prioridad: ${perfiles.analista_fea_cfd.prioridad}\n${perfiles.analista_fea_cfd.descripcion}\n\n` +
+    `${data.requisitos.nota_seleccion}\n\n` +
     `${notas}`;
 }
 
@@ -351,6 +367,22 @@ function getResponse(message) {
         response: `☁️ **${x.nombre}**\n\n${x.que_es}\n\n` +
           `**Capacidades:**\n${x.capacidades.map(c => `• ${c}`).join('\n')}\n\n` +
           `**Diferencia vs Desktop:** ${x.diferencia_vs_desktop}`,
+      };
+    }
+
+    case 'hardware': {
+      const hw = data.requisitos.hardware_certificado;
+      const filas = hw.equipos.map(e =>
+        `<tr><td>${e.marca}</td><td>${e.modelo}</td><td>${e.so}</td><td>${e.gpu}</td><td>${e.sw_version}</td><td>${e.driver}</td></tr>`
+      ).join('');
+      const tabla = `<div class="cadso-table-wrap"><table class="cadso-table">` +
+        `<thead><tr><th>Marca</th><th>Modelo</th><th>S.O.</th><th>GPU</th><th>SW Version</th><th>Driver</th></tr></thead>` +
+        `<tbody>${filas}</tbody></table></div>`;
+      return {
+        answered: true,
+        response: `🖥️ **Hardware certificado para SolidWorks**\n\n` +
+          tabla + `\n\n` +
+          `${hw.nota}`,
       };
     }
 

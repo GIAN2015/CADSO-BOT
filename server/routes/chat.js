@@ -75,13 +75,13 @@ router.post('/image', async (req, res) => {
 
 router.post('/support', async (req, res) => {
   try {
-    const { nombre, email, telefono, problema } = req.body;
+    const { nombre, email, telefono, problema, imagen } = req.body;
 
     if (!nombre || !email || !problema) {
       return res.status(400).json({ error: 'Nombre, email y descripción del problema son requeridos.' });
     }
 
-    await sendSupportEmail({ nombre, email, telefono, problema });
+    await sendSupportEmail({ nombre, email, telefono, problema, imagen });
     console.log(`Solicitud de soporte enviada por email - ${nombre} (${email})`);
 
     return res.json({ success: true, message: 'Tu solicitud fue enviada. Un técnico de CADSO se contactará contigo pronto.' });

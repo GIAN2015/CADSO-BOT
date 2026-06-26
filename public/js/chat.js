@@ -288,8 +288,30 @@
         <input type="email" name="email" placeholder="Tu correo electrónico *" required />
         <input type="tel" name="telefono" placeholder="Tu teléfono (opcional)" />
         <textarea name="problema" placeholder="Describe tu problema *" rows="3" required></textarea>
+        <label class="cadso-form-file">
+          📎 Adjuntar o pegar (Ctrl+V) captura de pantalla
+          <input type="file" name="imagen" accept="image/*" style="display:none" />
+        </label>
+        <span class="cadso-form-filename"></span>
         <button type="submit">Enviar solicitud</button>
       `;
+      form.querySelector('input[name="imagen"]').addEventListener('change', (ev) => {
+        const name = ev.target.files[0] ? ev.target.files[0].name : '';
+        form.querySelector('.cadso-form-filename').textContent = name;
+      });
+      form._pastedFile = null;
+      form.addEventListener('paste', (ev) => {
+        const items = ev.clipboardData && ev.clipboardData.items;
+        if (!items) return;
+        for (const item of items) {
+          if (item.type.startsWith('image/')) {
+            ev.preventDefault();
+            form._pastedFile = item.getAsFile();
+            form.querySelector('.cadso-form-filename').textContent = '📋 Imagen pegada desde portapapeles';
+            return;
+          }
+        }
+      });
       form.onsubmit = (e) => submitSupportForm(e, form);
       msg.appendChild(form);
     }
@@ -321,11 +343,18 @@
     btn.disabled = true;
     btn.textContent = 'Enviando...';
 
+    const imgFile = form.querySelector('input[name="imagen"]').files[0] || form._pastedFile;
+    let imagen = null;
+    if (imgFile) {
+      imagen = await compressImage(imgFile);
+    }
+
     const data = {
       nombre: form.nombre.value.trim(),
       email: form.email.value.trim(),
       telefono: form.telefono.value.trim(),
       problema: form.problema.value.trim(),
+      imagen,
     };
 
     try {

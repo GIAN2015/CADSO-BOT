@@ -230,6 +230,52 @@
   color: #e8762a;
 }
 
+/* ── Tabla de requisitos ── */
+.cadso-table-wrap {
+  overflow-x: auto;
+  margin: 8px 0;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+
+.cadso-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.cadso-table thead {
+  background: #2d3a50;
+  color: white;
+}
+
+.cadso-table th {
+  padding: 8px 10px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 11px;
+}
+
+.cadso-table td {
+  padding: 7px 10px;
+  border-bottom: 1px solid #eee;
+  color: #333;
+}
+
+.cadso-table tbody tr:nth-child(even) {
+  background: #f9f9f9;
+}
+
+.cadso-table tbody tr:hover {
+  background: #fef4ec;
+}
+
+.cadso-table td:first-child {
+  color: #e8762a;
+  font-weight: 600;
+}
+
 /* ── Opciones ── */
 .cadso-msg-opciones {
   display: flex;
@@ -367,6 +413,29 @@
 .cadso-support-form textarea {
   resize: vertical;
   min-height: 60px;
+}
+
+.cadso-form-file {
+  display: block;
+  padding: 9px 12px;
+  border: 1.5px dashed #ccc;
+  border-radius: 8px;
+  font-size: 13px;
+  color: #888;
+  cursor: pointer;
+  text-align: center;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.cadso-form-file:hover {
+  border-color: #e8762a;
+  color: #e8762a;
+}
+
+.cadso-form-filename {
+  font-size: 12px;
+  color: #e8762a;
+  font-weight: 500;
 }
 
 .cadso-support-form button {
